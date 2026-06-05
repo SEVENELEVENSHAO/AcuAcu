@@ -432,10 +432,10 @@ p {
 .strategy-point-grid {
   display: grid;
   gap: 6px;
-  grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+  grid-template-columns: repeat(auto-fill, 72px);
+  justify-content: start;
 }
 
-.strategy-point,
 .strategy-pair {
   background: #fff;
   border: 1px solid rgba(22, 22, 22, 0.18);
@@ -446,7 +446,6 @@ p {
   padding: 7px 8px;
 }
 
-.strategy-point strong,
 .strategy-pair strong {
   color: #1f2a25;
   font-size: 0.84rem;
@@ -455,7 +454,6 @@ p {
   overflow-wrap: anywhere;
 }
 
-.strategy-point small,
 .strategy-pair small {
   color: #67716c;
   font-size: 0.72rem;
@@ -465,7 +463,22 @@ p {
 
 .strategy-pair-list {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
   gap: 6px;
+}
+
+.strategy-point-tile {
+  min-height: auto;
+}
+
+.strategy-pair {
+  align-content: center;
+  aspect-ratio: 1.35;
+  border: 1.5px solid #161616;
+  box-shadow: 2px 2px 0 #161616;
+  justify-items: center;
+  padding: 8px;
+  text-align: center;
 }
 
 .pattern-list {

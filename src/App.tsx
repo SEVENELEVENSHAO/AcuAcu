@@ -607,11 +607,13 @@ function CommonStrategy({ content }: { content: (typeof expandedContentByCourse)
                   {group.points.map((point) => {
                     const meta = getPointMeta(point.code);
                     return (
-                      <span className="strategy-point" key={`${group.label}-${point.code}`}>
-                        <strong>{meta.chineseName}</strong>
-                        <small>
-                          {meta.code} · {point.count}x
-                        </small>
+                      <span
+                        className={`point-tile strategy-point-tile ${group.color ? "" : "neutral"}`}
+                        key={`${group.label}-${point.code}`}
+                        style={{ "--point-color": group.color ?? "#ece7de" } as CSSProperties}
+                      >
+                        <span className="point-name">{meta.chineseName}</span>
+                        <span className="point-code">{meta.code}</span>
                       </span>
                     );
                   })}
@@ -625,7 +627,6 @@ function CommonStrategy({ content }: { content: (typeof expandedContentByCourse)
                   {group.pairs.map((pair) => (
                     <span className="strategy-pair" key={`${group.label}-${pair.points.join("-")}`}>
                       <strong>{pair.points.join(" + ")}</strong>
-                      <small>{pair.count}x across patterns</small>
                     </span>
                   ))}
                 </div>
