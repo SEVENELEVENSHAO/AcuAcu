@@ -692,6 +692,11 @@ p {
   overflow: hidden;
 }
 
+.point-tile.wide {
+  aspect-ratio: 2 / 1;
+  grid-column: span 2;
+}
+
 .point-name,
 .point-code {
   display: grid;

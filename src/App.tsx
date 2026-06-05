@@ -140,6 +140,12 @@ function pointGroupsFor(principle: string, pointsText: string) {
   return Array.from(groups.values());
 }
 
+function pointTileClass(code: string, extraClass = "") {
+  const meta = getPointMeta(code);
+  const isWide = meta.code.length > 9 || meta.chineseName.length > 4;
+  return `point-tile ${extraClass} ${isWide ? "wide" : ""}`.trim();
+}
+
 function styleForAction(action: PointAction) {
   return principleStyles.find((style) => style.action === action);
 }
@@ -670,7 +676,10 @@ function CommonStrategy({ content }: { content: (typeof expandedContentByCourse)
                     const meta = getPointMeta(point.code);
                     return (
                       <span
-                        className={`point-tile strategy-point-tile ${group.color ? "" : "neutral"}`}
+                        className={pointTileClass(
+                          point.code,
+                          `strategy-point-tile ${group.color ? "" : "neutral"}`,
+                        )}
                         key={`${group.label}-${point.code}`}
                         style={{ "--point-color": group.color ?? "#ece7de" } as CSSProperties}
                       >
@@ -755,7 +764,7 @@ function PointPrescription({
               const meta = getPointMeta(point);
               return (
                 <span
-                  className={`point-tile ${group.color ? "" : "neutral"}`}
+                  className={pointTileClass(point, group.color ? "" : "neutral")}
                   key={`${group.label}-${point}`}
                   style={{ "--point-color": group.color ?? "#ece7de" } as CSSProperties}
                 >
