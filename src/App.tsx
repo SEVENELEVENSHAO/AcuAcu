@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import acuData from "../data/acu3-course-organ-system-chart.json";
 import { heartContent } from "./heartContent";
 import { lungContent, type FormulaDetail } from "./lungContent";
+import { spleenContent } from "./spleenContent";
 import { extractPoints, getPointMeta, type PointAction } from "./pointMeta";
 
 type AcuCondition = {
@@ -31,6 +32,7 @@ const dataset = acuData as AcuDataset;
 const expandedContentByCourse = {
   ...lungContent,
   ...heartContent,
+  ...spleenContent,
 };
 const categoryOrder = [
   "Lung System Disorders",
