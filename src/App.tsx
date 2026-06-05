@@ -2,6 +2,7 @@ import { ArrowLeft, BookOpen, ChevronRight, Search } from "lucide-react";
 import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 import acuData from "../data/acu3-course-organ-system-chart.json";
+import formulaResourceData from "../data/formula-resources.json";
 import { heartContent } from "./heartContent";
 import { lungContent, type FormulaDetail } from "./lungContent";
 import { spleenContent } from "./spleenContent";
@@ -28,7 +29,16 @@ type SystemGroup = {
   items: AcuCondition[];
 };
 
+type FormulaResource = {
+  id: string;
+  title: string;
+  englishTitle: string;
+  fileName: string;
+  sourceRole: string;
+};
+
 const dataset = acuData as AcuDataset;
+const formulaResources = formulaResourceData.resources as FormulaResource[];
 const expandedContentByCourse = {
   ...lungContent,
   ...heartContent,
@@ -580,7 +590,25 @@ function DiseaseDetail({
       <section className="source-section">
         <h3>Source Lecture</h3>
         <p>{condition.sourceFile}</p>
+        <FormulaResources />
       </section>
+    </div>
+  );
+}
+
+function FormulaResources() {
+  return (
+    <div className="formula-resource-block">
+      <h4>Formula Resources</h4>
+      <div className="formula-resource-list">
+        {formulaResources.map((resource) => (
+          <article className="formula-resource-card" key={resource.id}>
+            <strong>{resource.title}</strong>
+            <span>{resource.englishTitle}</span>
+            <small>{resource.sourceRole}</small>
+          </article>
+        ))}
+      </div>
     </div>
   );
 }

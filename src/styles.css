@@ -695,6 +695,49 @@ p {
   line-height: 1.45;
 }
 
+.formula-resource-block {
+  margin-top: 14px;
+}
+
+.formula-resource-block h4 {
+  color: #35423c;
+  font-size: 0.78rem;
+  font-weight: 900;
+  margin: 0 0 8px;
+}
+
+.formula-resource-list {
+  display: grid;
+  gap: 7px;
+}
+
+.formula-resource-card {
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(50, 55, 52, 0.06);
+  display: grid;
+  gap: 2px;
+  padding: 9px 10px;
+}
+
+.formula-resource-card strong {
+  color: #26312d;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.formula-resource-card span {
+  color: #56645e;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.formula-resource-card small {
+  color: #68756f;
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
 .empty-state,
 .detail-placeholder {
   border: 0;
