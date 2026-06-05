@@ -1,0 +1,1063 @@
+{
+  "version": "0.3-tcm-internal-medicine-categories",
+  "course": "ICTCMV 300 Chinese Acupuncture (3), Summer 2026",
+  "classification": "English chapter-style categories based on Chinese Internal Medicine organ-system organization, with Fu Ke grouped separately.",
+  "conditionCount": 73,
+  "internalMedicineCount": 47,
+  "obGynCount": 26,
+  "items": [
+    {
+      "courseNumber": 1,
+      "organSystem": "Spleen and Stomach Disorders",
+      "diseaseName": "Abdominal Mass / Ji Ju",
+      "pinyin": "ji ju",
+      "subPatterns": [
+        "Qi mass: Liver Qi stagnation",
+        "Qi mass: retention of food and phlegm",
+        "Blood mass: stagnation of Qi and Blood",
+        "Blood mass: Blood stasis knotted in the interior",
+        "Blood mass: deficiency of upright Qi with Blood stasis"
+      ],
+      "sourceFile": "LEC 01 Abdominal mass, abdominal pain, atrophy.pdf"
+    },
+    {
+      "courseNumber": 2,
+      "organSystem": "Spleen and Stomach Disorders",
+      "diseaseName": "Abdominal Pain",
+      "pinyin": "fu tong",
+      "subPatterns": [
+        "Cold in the intestines",
+        "Damp-Heat in the intestines",
+        "Food retention",
+        "Qi stagnation",
+        "Blood stasis",
+        "Qi deficiency with empty-cold in the abdomen"
+      ],
+      "sourceFile": "LEC 01 Abdominal mass, abdominal pain, atrophy.pdf"
+    },
+    {
+      "courseNumber": 3,
+      "organSystem": "Channel and Body Disorders",
+      "diseaseName": "Atrophy-Flaccidity",
+      "pinyin": "wei zheng",
+      "subPatterns": [
+        "Heat in Lungs injuring Yin fluids",
+        "Damp-Heat invasion",
+        "Cold-Damp invasion",
+        "Stomach and Spleen deficiency",
+        "Spleen and Heart collapse",
+        "Kidney and Liver deficiency",
+        "Blood stasis in the channels"
+      ],
+      "sourceFile": "LEC 01 Abdominal mass, abdominal pain, atrophy.pdf"
+    },
+    {
+      "courseNumber": 4,
+      "organSystem": "Qi, Blood, and Fluid Disorders",
+      "diseaseName": "Bleeding Disorders",
+      "pinyin": "xue zheng",
+      "subPatterns": [
+        "Epistaxis: Lung Heat",
+        "Stomach Heat",
+        "Liver Fire",
+        "Liver-Kidney Yin deficiency",
+        "Spleen Qi failing to control Blood. Coughing blood: Wind-Dry Heat",
+        "Liver Fire invading Lung",
+        "Lung Yin deficiency with empty Heat. Vomiting blood: Stomach Heat",
+        "Liver Fire invading Stomach",
+        "Spleen-Stomach Qi deficiency. Blood in stool: Damp-Heat in intestines",
+        "Spleen-Stomach deficient Cold. Blood in urine: Bladder Heat/Heart Fire",
+        "Kidney Yin deficiency with empty Heat",
+        "Spleen failing to control Blood",
+        "Kidney Qi not firm. Petechiae: Blood Heat",
+        "Yin deficiency with empty Heat",
+        "Qi deficiency not holding Blood. Bleeding gums: Stomach Heat",
+        "Stomach Yin deficiency with empty Heat",
+        "Stomach-Spleen deficiency"
+      ],
+      "sourceFile": "LEC 02 Bleeding, chest Bi, Common cold.pdf"
+    },
+    {
+      "courseNumber": 5,
+      "organSystem": "Heart and Mind Disorders",
+      "diseaseName": "Chest Impediment",
+      "pinyin": "xiong bi",
+      "subPatterns": [
+        "Stagnation of Qi in the chest",
+        "Heart Blood stasis",
+        "Turbid phlegm stagnating in the chest",
+        "Cold stagnation in the chest",
+        "Heart-Kidney Yin deficiency",
+        "Qi and Yin deficiency",
+        "Spleen-Kidney Yang Qi deficiency"
+      ],
+      "sourceFile": "LEC 02 Bleeding, chest Bi, Common cold.pdf"
+    },
+    {
+      "courseNumber": 6,
+      "organSystem": "Lung System Disorders",
+      "diseaseName": "Common Cold",
+      "pinyin": "gan mao",
+      "subPatterns": [
+        "Wind-Cold invasion",
+        "Wind-Heat invasion",
+        "Summer-Heat Damp invasion",
+        "Cold with underlying Qi deficiency",
+        "Cold with underlying Yin deficiency"
+      ],
+      "sourceFile": "LEC 02 Bleeding, chest Bi, Common cold.pdf"
+    },
+    {
+      "courseNumber": 7,
+      "organSystem": "Spleen and Stomach Disorders",
+      "diseaseName": "Constipation",
+      "pinyin": "bian bi",
+      "subPatterns": [
+        "Chronic interior Heat",
+        "Acute Heat in febrile disease",
+        "Liver Qi stagnation",
+        "Cold",
+        "Qi deficiency",
+        "Yang deficiency",
+        "Blood deficiency",
+        "Yin deficiency"
+      ],
+      "sourceFile": "LEC 03 constipation, consumptive ds, consumptive thirst.pdf"
+    },
+    {
+      "courseNumber": 8,
+      "organSystem": "Qi, Blood, and Fluid Disorders",
+      "diseaseName": "Consumptive Disease",
+      "pinyin": "xu lao",
+      "subPatterns": [
+        "Qi deficiency",
+        "Blood deficiency",
+        "Yin deficiency",
+        "Yang deficiency"
+      ],
+      "sourceFile": "LEC 03 constipation, consumptive ds, consumptive thirst.pdf"
+    },
+    {
+      "courseNumber": 9,
+      "organSystem": "Spleen and Stomach Disorders",
+      "diseaseName": "Consumptive Thirst / Xiao Ke",
+      "pinyin": "xiao ke",
+      "subPatterns": [
+        "Upper Xiao: Lung Heat damaging fluids",
+        "Middle Xiao: excessive Stomach Heat",
+        "Lower Xiao: Kidney Yin deficiency"
+      ],
+      "sourceFile": "LEC 03 constipation, consumptive ds, consumptive thirst.pdf"
+    },
+    {
+      "courseNumber": 10,
+      "organSystem": "Heart and Mind Disorders",
+      "diseaseName": "Convulsive Syndromes",
+      "pinyin": "jing zheng",
+      "subPatterns": [
+        "Obstruction of channels and collaterals by evils",
+        "Liver Wind stirring from exuberant Heat",
+        "Depletion of Yin and Blood"
+      ],
+      "sourceFile": "LEC 04 Convulsion, cough, depression.pdf"
+    },
+    {
+      "courseNumber": 11,
+      "organSystem": "Lung System Disorders",
+      "diseaseName": "Cough",
+      "pinyin": "ke shou",
+      "subPatterns": [
+        "Wind-Cold invading Lung",
+        "Wind-Heat invading Lung",
+        "Wind-Dryness invading Lung",
+        "Phlegm-Heat retention in Lung",
+        "Phlegm-Damp retention in Lung",
+        "Phlegm-Fluid retention in Lung",
+        "Lung Heat",
+        "Lung Qi deficiency",
+        "Lung Yin deficiency",
+        "Liver Fire attacking Lung"
+      ],
+      "sourceFile": "LEC 04 Convulsion, cough, depression.pdf"
+    },
+    {
+      "courseNumber": 12,
+      "organSystem": "Heart and Mind Disorders",
+      "diseaseName": "Depression",
+      "pinyin": "yu zheng",
+      "subPatterns": [
+        "Liver Qi stagnation",
+        "Static Qi transforming into Fire",
+        "Static Qi and Phlegm obstruction",
+        "Yin and Blood deficiency"
+      ],
+      "sourceFile": "LEC 04 Convulsion, cough, depression.pdf"
+    },
+    {
+      "courseNumber": 13,
+      "organSystem": "Spleen and Stomach Disorders",
+      "diseaseName": "Diarrhea",
+      "pinyin": "xie xie",
+      "subPatterns": [
+        "Cold-Damp retention",
+        "Damp-Heat retention",
+        "Food retention",
+        "Liver Qi stagnation",
+        "Spleen-Stomach deficiency",
+        "Kidney Yang deficiency"
+      ],
+      "sourceFile": "LEC 05 Diarrhea, drum distension, dysentery.pdf"
+    },
+    {
+      "courseNumber": 14,
+      "organSystem": "Spleen and Stomach Disorders",
+      "diseaseName": "Drum Distension",
+      "pinyin": "gu zhang",
+      "subPatterns": [
+        "Qi stagnation with Damp obstruction",
+        "Cold-Damp blocking Spleen",
+        "Damp-Heat accumulation",
+        "Spleen Qi stagnation with Liver Blood stasis",
+        "Spleen-Kidney Yang deficiency",
+        "Liver-Kidney Yin deficiency"
+      ],
+      "sourceFile": "LEC 05 Diarrhea, drum distension, dysentery.pdf"
+    },
+    {
+      "courseNumber": 15,
+      "organSystem": "Spleen and Stomach Disorders",
+      "diseaseName": "Dysentery",
+      "pinyin": "li ji",
+      "subPatterns": [
+        "Damp-Heat dysentery",
+        "Epidemic toxic dysentery",
+        "Cold-Damp dysentery",
+        "Yin deficiency dysentery",
+        "Deficient Cold dysentery",
+        "Intermittent dysentery",
+        "Food-resistant dysentery"
+      ],
+      "sourceFile": "LEC 05 Diarrhea, drum distension, dysentery.pdf"
+    },
+    {
+      "courseNumber": 16,
+      "organSystem": "Spleen and Stomach Disorders",
+      "diseaseName": "Dysphagia Occlusion Syndrome",
+      "pinyin": "ye ge",
+      "subPatterns": [
+        "Congestion of Qi and Phlegm",
+        "Depletion of fluids with accumulation of Heat",
+        "Accumulation of Blood stasis",
+        "Deficiency of Qi with devitalization of Yang"
+      ],
+      "sourceFile": "LEC 6 dysphagia, dyspnea, edema.pdf"
+    },
+    {
+      "courseNumber": 17,
+      "organSystem": "Lung System Disorders",
+      "diseaseName": "Dyspnea",
+      "pinyin": "chuan zheng",
+      "subPatterns": [
+        "Wind-Cold invasion",
+        "Wind-Cold exterior with Phlegm-Fluid interior",
+        "Cold exterior with Heat interior",
+        "Phlegm-Heat in Lungs",
+        "Lung Qi obstruction",
+        "Liver Fire attacking Lungs",
+        "Lung Qi deficiency",
+        "Lung-Kidney Yang deficiency",
+        "Lung-Heart-Kidney Yang deficiency",
+        "Lung Yin deficiency",
+        "Lung-Kidney Yin deficiency"
+      ],
+      "sourceFile": "LEC 6 dysphagia, dyspnea, edema.pdf"
+    },
+    {
+      "courseNumber": 18,
+      "organSystem": "Kidney and Bladder Disorders",
+      "diseaseName": "Edema",
+      "pinyin": "shui zhong",
+      "subPatterns": [
+        "Yang edema: Wind-Water invading Wei Qi",
+        "Fire poison",
+        "Dampness",
+        "Damp-Heat. Yin edema: Spleen Yang deficiency",
+        "Kidney Yang deficiency"
+      ],
+      "sourceFile": "LEC 6 dysphagia, dyspnea, edema.pdf"
+    },
+    {
+      "courseNumber": 19,
+      "organSystem": "Spleen and Stomach Disorders",
+      "diseaseName": "Epigastric Pain",
+      "pinyin": "wei tong",
+      "subPatterns": [
+        "Cold invading Stomach",
+        "Food retention",
+        "Liver Qi invading Stomach",
+        "Stomach Fire",
+        "Stomach Phlegm-Fire",
+        "Stomach Damp-Heat",
+        "Stomach and Liver Heat",
+        "Blood stasis in Stomach",
+        "Phlegm-Fluids in Stomach",
+        "Stomach-Spleen deficient Cold",
+        "Stomach Yin deficiency"
+      ],
+      "sourceFile": "LEC 07 Epigastric pain, epilepsy, fainting 2.pdf"
+    },
+    {
+      "courseNumber": 20,
+      "organSystem": "Heart and Mind Disorders",
+      "diseaseName": "Epilepsy",
+      "pinyin": "xian zheng",
+      "subPatterns": [
+        "Wind-Phlegm obstruction",
+        "Internal profusion of Phlegm-Fire",
+        "Liver-Kidney Yin deficiency",
+        "Spleen-Stomach Qi deficiency"
+      ],
+      "sourceFile": "LEC 07 Epigastric pain, epilepsy, fainting 2.pdf"
+    },
+    {
+      "courseNumber": 21,
+      "organSystem": "Heart and Mind Disorders",
+      "diseaseName": "Fainting",
+      "pinyin": "jue zheng",
+      "subPatterns": [
+        "Excess Qi syncope",
+        "Deficient Qi syncope",
+        "Excess Blood syncope",
+        "Deficient Blood syncope",
+        "Phlegm syncope",
+        "Food syncope",
+        "Summer-Heat syncope"
+      ],
+      "sourceFile": "LEC 07 Epigastric pain, epilepsy, fainting 2.pdf"
+    },
+    {
+      "courseNumber": 22,
+      "organSystem": "Liver and Gallbladder Disorders",
+      "diseaseName": "Goitre",
+      "pinyin": "ying bing",
+      "subPatterns": [
+        "Qi stagnation with Phlegm",
+        "Qi stagnation with Spleen Qi deficiency and Phlegm",
+        "Liver Fire blazing with Phlegm-Heat",
+        "Phlegm and Blood stasis",
+        "Liver-Heart Yin deficiency with Phlegm"
+      ],
+      "sourceFile": "LEC 08 goitre, headache, hiccup & belching.pdf"
+    },
+    {
+      "courseNumber": 23,
+      "organSystem": "Liver and Gallbladder Disorders",
+      "diseaseName": "Headache",
+      "pinyin": "tou tong",
+      "subPatterns": [
+        "Exterior Wind-Cold",
+        "Exterior Wind-Heat",
+        "Exterior Wind-Damp",
+        "Liver Yang rising",
+        "Liver Fire",
+        "Liver Wind",
+        "Liver Qi stagnation",
+        "Cold stagnation in Liver channel",
+        "Dampness",
+        "Turbid Phlegm",
+        "Turbid Phlegm-Wind",
+        "Food retention",
+        "Blood stasis",
+        "Stomach Heat",
+        "Qi deficiency",
+        "Blood deficiency",
+        "Kidney deficiency"
+      ],
+      "sourceFile": "LEC 08 goitre, headache, hiccup & belching.pdf"
+    },
+    {
+      "courseNumber": 24,
+      "organSystem": "Spleen and Stomach Disorders",
+      "diseaseName": "Hiccoughing and Belching",
+      "pinyin": "e ni",
+      "subPatterns": [
+        "Stomach Cold",
+        "Effulgent Stomach Fire",
+        "Liver Qi stagnation",
+        "Spleen-Stomach Yang deficiency",
+        "Stomach Yin deficiency",
+        "Food retention"
+      ],
+      "sourceFile": "LEC 08 goitre, headache, hiccup & belching.pdf"
+    },
+    {
+      "courseNumber": 25,
+      "organSystem": "Liver and Gallbladder Disorders",
+      "diseaseName": "Hypochondrial Pain",
+      "pinyin": "xie tong",
+      "subPatterns": [
+        "Liver Qi stagnation",
+        "Blood stasis",
+        "Damp-Heat in Liver and Gallbladder",
+        "Liver Blood deficiency",
+        "Liver Yin deficiency"
+      ],
+      "sourceFile": "LEC 9 Hypochonriac pain, impediment, impotence (1).pdf"
+    },
+    {
+      "courseNumber": 26,
+      "organSystem": "Channel and Body Disorders",
+      "diseaseName": "Impediment Syndrome",
+      "pinyin": "bi zheng",
+      "subPatterns": [
+        "Migratory Bi/Wind Bi",
+        "Painful Bi/Cold Bi",
+        "Fixed Bi/Damp Bi",
+        "Heat Bi",
+        "Chronic Phlegm accumulation with Blood stasis",
+        "Qi and Blood deficiency"
+      ],
+      "sourceFile": "LEC 9 Hypochonriac pain, impediment, impotence (1).pdf"
+    },
+    {
+      "courseNumber": 27,
+      "organSystem": "Kidney and Bladder Disorders",
+      "diseaseName": "Impotence",
+      "pinyin": "yang wei",
+      "subPatterns": [
+        "Debilitation of Mingmen Fire",
+        "Kidney deficiency",
+        "Damp-Heat pouring downward into the lower burner"
+      ],
+      "sourceFile": "LEC 9 Hypochonriac pain, impediment, impotence (1).pdf"
+    },
+    {
+      "courseNumber": 28,
+      "organSystem": "Heart and Mind Disorders",
+      "diseaseName": "Insomnia",
+      "pinyin": "bu mei",
+      "subPatterns": [
+        "Liver Fire blazing",
+        "Heart Fire blazing",
+        "Phlegm-Fire harassing the mind",
+        "Residual Heat in the diaphragm",
+        "Heart-Spleen deficiency",
+        "Heart Yin deficiency",
+        "Heart-Kidney disharmony",
+        "Heart-Gallbladder deficiency",
+        "Liver Yin deficiency"
+      ],
+      "sourceFile": "LEC 10 Insomnia, internal damage fever, ischuria.pdf"
+    },
+    {
+      "courseNumber": 29,
+      "organSystem": "Qi, Blood, and Fluid Disorders",
+      "diseaseName": "Internal Damage Fever",
+      "pinyin": "nei shang fa re",
+      "subPatterns": [
+        "Qi stagnation fever",
+        "Blood stasis fever",
+        "Qi deficiency fever",
+        "Blood deficiency fever",
+        "Yin deficiency fever"
+      ],
+      "sourceFile": "LEC 10 Insomnia, internal damage fever, ischuria.pdf"
+    },
+    {
+      "courseNumber": 30,
+      "organSystem": "Kidney and Bladder Disorders",
+      "diseaseName": "Ischuria",
+      "pinyin": "long bi",
+      "subPatterns": [
+        "Heat or Damp-Heat accumulation in Bladder",
+        "Lung Heat congestion",
+        "Liver Qi stagnation",
+        "Decline of Mingmen Fire / Kidney Qi or Yang insufficiency",
+        "Spleen Qi deficiency",
+        "Meridian Qi damage / internal Blood stasis obstruction / traumatic injury"
+      ],
+      "sourceFile": "LEC 10 Insomnia, internal damage fever, ischuria.pdf"
+    },
+    {
+      "courseNumber": 31,
+      "organSystem": "Liver and Gallbladder Disorders",
+      "diseaseName": "Jaundice",
+      "pinyin": "huang dan",
+      "subPatterns": [
+        "Yang jaundice: Damp-Heat in middle burner with Heat predominant",
+        "Yang jaundice: Damp-Heat in middle burner with Damp predominant",
+        "Extreme repletion of Heat toxins",
+        "Yin jaundice: Cold-Damp in middle burner"
+      ],
+      "sourceFile": "LEC 11 Jaundice, lumbago, lung distension.pdf"
+    },
+    {
+      "courseNumber": 32,
+      "organSystem": "Kidney and Bladder Disorders",
+      "diseaseName": "Lumbago",
+      "pinyin": "yao tong",
+      "subPatterns": [
+        "Cold-Damp invasion",
+        "Qi and Blood stagnation",
+        "Kidney deficiency"
+      ],
+      "sourceFile": "LEC 11 Jaundice, lumbago, lung distension.pdf"
+    },
+    {
+      "courseNumber": 33,
+      "organSystem": "Lung System Disorders",
+      "diseaseName": "Lung Distention",
+      "pinyin": "fei zhang",
+      "subPatterns": [
+        "Phlegm-Turbidity obstructing Lung",
+        "Phlegm-Heat accumulating in Lung",
+        "Phlegm veiling Heart orifice",
+        "Qi deficiency of Lung and Kidney",
+        "Water retention due to Yang deficiency"
+      ],
+      "sourceFile": "LEC 11 Jaundice, lumbago, lung distension.pdf"
+    },
+    {
+      "courseNumber": 34,
+      "organSystem": "Liver and Gallbladder Disorders",
+      "diseaseName": "Malaria",
+      "pinyin": "nue ji",
+      "subPatterns": [
+        "Typical malaria",
+        "Warm malaria",
+        "Cold malaria",
+        "Taxation malaria",
+        "Miasmic malaria"
+      ],
+      "sourceFile": "LEC 12 Malaria, mania, palpitation.pdf"
+    },
+    {
+      "courseNumber": 35,
+      "organSystem": "Heart and Mind Disorders",
+      "diseaseName": "Mania / Manic-Depressive Disorder",
+      "pinyin": "dian kuang",
+      "subPatterns": [
+        "Depressive psychotic pattern: Binding depression of Qi and Phlegm",
+        "Depressive psychotic pattern: Heart-Spleen deficiency",
+        "Manic psychotic pattern: Phlegm-Fire harassing interior",
+        "Manic psychotic pattern: Exuberant Fire with injury to Yin"
+      ],
+      "sourceFile": "LEC 12 Malaria, mania, palpitation.pdf"
+    },
+    {
+      "courseNumber": 36,
+      "organSystem": "Heart and Mind Disorders",
+      "diseaseName": "Palpitation",
+      "pinyin": "xin ji",
+      "subPatterns": [
+        "Heart-Gallbladder Qi deficiency disturbing the mind",
+        "Qi and Heart Blood insufficiency",
+        "Heart Fire hyperactivity due to Heart-Kidney Yin deficiency / Heart-Kidney disharmony / Yin deficiency with effulgent Fire",
+        "Heart Yang deficiency",
+        "Heart oppressed by Water and Phlegm-Fluid",
+        "Heart obstructed by Blood stasis"
+      ],
+      "sourceFile": "LEC 12 Malaria, mania, palpitation.pdf"
+    },
+    {
+      "courseNumber": 37,
+      "organSystem": "Lung System Disorders",
+      "diseaseName": "Pulmonary Abscess",
+      "pinyin": "fei yong",
+      "subPatterns": [
+        "Initial stage",
+        "Suppurative stage",
+        "Perforating stage",
+        "Recovery stage"
+      ],
+      "sourceFile": "LEC 13 Pulmonary abscess, pulmonary tuberculosis, seminal emission.pdf"
+    },
+    {
+      "courseNumber": 38,
+      "organSystem": "Lung System Disorders",
+      "diseaseName": "Pulmonary Tuberculosis",
+      "pinyin": "fei lao",
+      "subPatterns": [
+        "Lung Yin deficiency",
+        "Yin deficiency with effulgent Fire",
+        "Qi and Yin deficiency",
+        "Yin and Yang deficiency"
+      ],
+      "sourceFile": "LEC 13 Pulmonary abscess, pulmonary tuberculosis, seminal emission.pdf"
+    },
+    {
+      "courseNumber": 39,
+      "organSystem": "Kidney and Bladder Disorders",
+      "diseaseName": "Seminal Emission",
+      "pinyin": "yi jing",
+      "subPatterns": [
+        "Heart Fire hyperactivity with Kidney Yin deficiency",
+        "Downward flow of Damp-Heat",
+        "Heart-Spleen deficiency",
+        "Kidney deficiency"
+      ],
+      "sourceFile": "LEC 13 Pulmonary abscess, pulmonary tuberculosis, seminal emission.pdf"
+    },
+    {
+      "courseNumber": 40,
+      "organSystem": "Lung System Disorders",
+      "diseaseName": "Spontaneous Sweats and Night Sweats",
+      "pinyin": "zi han / dao han",
+      "subPatterns": [
+        "Spontaneous sweat: Lung Qi deficiency",
+        "disharmony between Ying and Wei",
+        "stagnation of pathogenic Heat. Night sweat: Blood deficiency",
+        "Yin deficiency of Lung/Kidney with empty Heat"
+      ],
+      "sourceFile": "LEC 14 Sweating, stranguria, tinnitus.pdf"
+    },
+    {
+      "courseNumber": 41,
+      "organSystem": "Kidney and Bladder Disorders",
+      "diseaseName": "Stranguria",
+      "pinyin": "lin zheng",
+      "subPatterns": [
+        "Heat Lin",
+        "Stone Lin",
+        "Blood Lin",
+        "Qi Lin",
+        "Sticky/Cloudy Lin",
+        "Fatigue Lin"
+      ],
+      "sourceFile": "LEC 14 Sweating, stranguria, tinnitus.pdf"
+    },
+    {
+      "courseNumber": 42,
+      "organSystem": "Kidney and Bladder Disorders",
+      "diseaseName": "Tinnitus and Deafness",
+      "pinyin": "er ming er long",
+      "subPatterns": [
+        "Liver-Gallbladder Fire rising",
+        "Wind-Heat invasion",
+        "Phlegm-Fire flaring upward",
+        "Kidney Essence deficiency",
+        "Spleen-Stomach Qi deficiency"
+      ],
+      "sourceFile": "LEC 14 Sweating, stranguria, tinnitus.pdf"
+    },
+    {
+      "courseNumber": 43,
+      "organSystem": "Liver and Gallbladder Disorders",
+      "diseaseName": "Vertigo",
+      "pinyin": "xuan yun",
+      "subPatterns": [
+        "Liver Yang, Liver Fire, or Liver Wind rising",
+        "Turbid Phlegm in head / Phlegm retention in middle burner",
+        "Qi and Blood deficiency",
+        "Kidney Essence deficiency"
+      ],
+      "sourceFile": "LEC 15 Vertigo, vomiting, watery phlegm  (2).pdf"
+    },
+    {
+      "courseNumber": 44,
+      "organSystem": "Spleen and Stomach Disorders",
+      "diseaseName": "Vomiting",
+      "pinyin": "ou tu",
+      "subPatterns": [
+        "Exogenous evils invading Stomach",
+        "Food retention",
+        "Phlegm-Damp retention",
+        "Liver Qi invading Stomach",
+        "Spleen-Stomach deficiency Cold",
+        "Stomach Yin deficiency"
+      ],
+      "sourceFile": "LEC 15 Vertigo, vomiting, watery phlegm  (2).pdf"
+    },
+    {
+      "courseNumber": 45,
+      "organSystem": "Qi, Blood, and Fluid Disorders",
+      "diseaseName": "Watery Phlegm / Sputum",
+      "pinyin": "tan yin",
+      "subPatterns": [
+        "Tan Yin: Phlegm-Fluid retention in Stomach and intestines",
+        "Spleen Yang deficiency",
+        "Fluid retention in Stomach and intestines. Xuan Yin: Pleural fluid retention",
+        "pathogenic factors attacking chest and Lung",
+        "fluid retention in chest and hypochondrium",
+        "Qi obstruction in collaterals",
+        "internal Heat due to Yin deficiency. Yi Yin: subcutaneous fluid retention. Zhi Yin: thoracic fluid retention",
+        "Cold-Fluid retention in Lung",
+        "Spleen-Kidney Yang deficiency"
+      ],
+      "sourceFile": "LEC 15 Vertigo, vomiting, watery phlegm  (2).pdf"
+    },
+    {
+      "courseNumber": 46,
+      "organSystem": "Lung System Disorders",
+      "diseaseName": "Wheezing Syndrome",
+      "pinyin": "xiao zheng",
+      "subPatterns": [
+        "Acute cold Phlegm",
+        "Acute hot Phlegm",
+        "Chronic Lung deficiency",
+        "Chronic Spleen deficiency",
+        "Chronic Kidney deficiency"
+      ],
+      "sourceFile": "LEC 16 wheezing, wind stroke, abdominal mass  (1).pdf"
+    },
+    {
+      "courseNumber": 47,
+      "organSystem": "Heart and Mind Disorders",
+      "diseaseName": "Wind Stroke",
+      "pinyin": "zhong feng",
+      "subPatterns": [
+        "Attack of channels and collaterals",
+        "Attack of internal organs: tense type",
+        "Attack of internal organs: flaccid type",
+        "Sequelae: Wind-Phlegm",
+        "Damp-Phlegm",
+        "Qi and Blood stagnation",
+        "Yin deficiency with empty Heat"
+      ],
+      "sourceFile": "LEC 16 wheezing, wind stroke, abdominal mass  (1).pdf"
+    },
+    {
+      "courseNumber": 76,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Abdominal Masses / Zheng Jia",
+      "pinyin": "zheng jia",
+      "subPatterns": [
+        "Stagnation of Qi",
+        "Blood stasis",
+        "Phlegm-Dampness"
+      ],
+      "sourceFile": "LEC 16 wheezing, wind stroke, abdominal mass  (1).pdf"
+    },
+    {
+      "courseNumber": 77,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Amenorrhea",
+      "pinyin": "bi jing",
+      "subPatterns": [
+        "Liver-Kidney deficiency",
+        "Depletion of Yin and dryness of Blood",
+        "Qi and Blood deficiency",
+        "Qi stagnation with Blood stasis",
+        "Phlegm-Damp obstruction in uterus"
+      ],
+      "sourceFile": "LEC 17 amenorrhea, unstable pregnancy, dysmenorrhea.pdf"
+    },
+    {
+      "courseNumber": 78,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Bleeding During Pregnancy / Unstable Pregnancy",
+      "pinyin": "tai lou / tai dong bu an",
+      "subPatterns": [
+        "Kidney deficiency",
+        "Qi and Blood deficiency",
+        "Blood Heat",
+        "Blood stasis / trauma"
+      ],
+      "sourceFile": "LEC 17 amenorrhea, unstable pregnancy, dysmenorrhea.pdf"
+    },
+    {
+      "courseNumber": 79,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Dysmenorrhea",
+      "pinyin": "tong jing",
+      "subPatterns": [
+        "Cold-Damp coagulation",
+        "Liver Qi stagnation",
+        "Damp-Heat descending",
+        "Yang deficiency with internal Cold",
+        "Liver-Kidney deficiency",
+        "Qi and Blood deficiency"
+      ],
+      "sourceFile": "LEC 17 amenorrhea, unstable pregnancy, dysmenorrhea.pdf"
+    },
+    {
+      "courseNumber": 80,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Infertility",
+      "pinyin": "bu yun",
+      "subPatterns": [
+        "Kidney Yang deficiency",
+        "Kidney Yin deficiency",
+        "Blood deficiency",
+        "Cold in uterus",
+        "Dampness in lower burner",
+        "Blood stasis",
+        "Qi stagnation",
+        "Blood Heat"
+      ],
+      "sourceFile": "LEC 18 infertility, insufficient lactation, intermenstrual bleeding.pdf"
+    },
+    {
+      "courseNumber": 81,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Insufficient Breastmilk",
+      "pinyin": "que ru",
+      "subPatterns": [
+        "Qi and Blood deficiency",
+        "Liver Qi stagnation"
+      ],
+      "sourceFile": "LEC 18 infertility, insufficient lactation, intermenstrual bleeding.pdf"
+    },
+    {
+      "courseNumber": 82,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Intermenstrual Bleeding",
+      "pinyin": "jing jian qi chu xue",
+      "subPatterns": [
+        "Liver-Kidney Yin deficiency with empty Heat",
+        "Damp-Heat",
+        "Blood stasis",
+        "Spleen-Kidney Yang deficiency"
+      ],
+      "sourceFile": "LEC 18 infertility, insufficient lactation, intermenstrual bleeding.pdf"
+    },
+    {
+      "courseNumber": 83,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Irregular Menstruation",
+      "pinyin": "yue jing bu tiao",
+      "subPatterns": [
+        "Early periods: Blood Heat, full Heat, Heat accumulation, stagnant Liver Qi turning into Fire with Blood Heat, empty Heat, Qi deficiency, Spleen Qi deficiency, Kidney Qi deficiency. Late periods: Blood deficiency, Cold excess/deficiency, Qi stagnation. Unpredictable periods: Liver Qi stagnation, Kidney deficiency"
+      ],
+      "sourceFile": "LEC 19 Irregular period, leucorrhea, lochirrhea.pdf"
+    },
+    {
+      "courseNumber": 84,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Leukorrhagia",
+      "pinyin": "dai xia",
+      "subPatterns": [
+        "Spleen Qi deficiency",
+        "Kidney Yang deficiency",
+        "Kidney Yin deficiency",
+        "Damp-Heat pouring downward",
+        "Toxic Heat",
+        "Liver Qi stagnation"
+      ],
+      "sourceFile": "LEC 19 Irregular period, leucorrhea, lochirrhea.pdf"
+    },
+    {
+      "courseNumber": 85,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Lochiorrhea",
+      "pinyin": "chan hou e lu bu jue",
+      "subPatterns": [
+        "Qi deficiency",
+        "Blood stasis",
+        "Blood Heat"
+      ],
+      "sourceFile": "LEC 19 Irregular period, leucorrhea, lochirrhea.pdf"
+    },
+    {
+      "courseNumber": 86,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Menstrual Breast Aching",
+      "pinyin": "jing xing ru fang zhang tong",
+      "subPatterns": [
+        "Liver Qi stagnation",
+        "Liver Blood stasis",
+        "Phlegm with Qi stagnation",
+        "Liver-Kidney Yin deficiency"
+      ],
+      "sourceFile": "LEC 20 menstrual breast aching, edema, headache.pdf"
+    },
+    {
+      "courseNumber": 87,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Menstrual Edema",
+      "pinyin": "jing xing fu zhong",
+      "subPatterns": [
+        "Spleen-Kidney Yang deficiency",
+        "Qi stagnation"
+      ],
+      "sourceFile": "LEC 20 menstrual breast aching, edema, headache.pdf"
+    },
+    {
+      "courseNumber": 88,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Menstrual Headache",
+      "pinyin": "jing xing tou tong",
+      "subPatterns": [
+        "Blood deficiency",
+        "Liver Fire blazing",
+        "Liver Yang rising",
+        "Blood stasis"
+      ],
+      "sourceFile": "LEC 20 menstrual breast aching, edema, headache.pdf"
+    },
+    {
+      "courseNumber": 89,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Menstrual Hematemesis and Epistaxis",
+      "pinyin": "jing xing tu niu",
+      "subPatterns": [
+        "Stagnant Liver Qi turning into Fire",
+        "Lung-Kidney Yin deficiency"
+      ],
+      "sourceFile": "LEC 21 menstrual hematemesis & epistaxis, mental disorder, oral ulcer.pdf"
+    },
+    {
+      "courseNumber": 90,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Menstrual Mental Disorder",
+      "pinyin": "jing xing qing zhi yi chang",
+      "subPatterns": [
+        "Liver Qi stagnation",
+        "Phlegm-Fire harassing upward",
+        "Liver Blood deficiency",
+        "Liver-Kidney Yin deficiency",
+        "Spleen-Kidney Yang deficiency"
+      ],
+      "sourceFile": "LEC 21 menstrual hematemesis & epistaxis, mental disorder, oral ulcer.pdf"
+    },
+    {
+      "courseNumber": 91,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Menstrual Oral Ulcer",
+      "pinyin": "jing xing kou mei",
+      "subPatterns": [
+        "Kidney Yin deficiency with empty Heat",
+        "Stomach Fire or Stomach Damp-Heat",
+        "Stomach Damp-Heat with Spleen deficiency"
+      ],
+      "sourceFile": "LEC 21 menstrual hematemesis & epistaxis, mental disorder, oral ulcer.pdf"
+    },
+    {
+      "courseNumber": 92,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Metrorrhagia and Metrostaxis",
+      "pinyin": "beng lou",
+      "subPatterns": [
+        "Blood Heat",
+        "Liver Qi stagnation turning into Heat",
+        "Blood empty Heat",
+        "Blood stasis",
+        "Damp-Heat in uterus",
+        "Spleen not holding Blood",
+        "Kidney Yang deficiency",
+        "Kidney Yin deficiency"
+      ],
+      "sourceFile": "LEC 22 metrorrhagia, miscarriage, morning sickness.pdf"
+    },
+    {
+      "courseNumber": 93,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Miscarriage / Habitual Miscarriage",
+      "pinyin": "zhui tai / xiao chan / hua tai",
+      "subPatterns": [
+        "Kidney Yang deficiency",
+        "Kidney Yin deficiency",
+        "Blood Heat",
+        "Spleen Qi deficiency",
+        "Blood deficiency",
+        "Blood stasis"
+      ],
+      "sourceFile": "LEC 22 metrorrhagia, miscarriage, morning sickness.pdf"
+    },
+    {
+      "courseNumber": 94,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Morning Sickness",
+      "pinyin": "ren chen e zu",
+      "subPatterns": [
+        "Stomach Qi deficiency with empty Cold",
+        "Stomach Yin deficiency",
+        "Stagnant Liver Qi invading Stomach",
+        "Stomach Heat",
+        "Accumulation of Phlegm",
+        "Heart Qi deficiency",
+        "Heart Fire"
+      ],
+      "sourceFile": "LEC 22 metrorrhagia, miscarriage, morning sickness.pdf"
+    },
+    {
+      "courseNumber": 95,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Perimenopausal Syndrome",
+      "pinyin": "jue jing qian hou zhu zheng",
+      "subPatterns": [
+        "Kidney Yin deficiency",
+        "Kidney Yang deficiency",
+        "Kidney Yin and Yang deficiency",
+        "Kidney-Liver Yin deficiency with Liver Yang rising",
+        "Kidney-Heart disharmony",
+        "Phlegm accumulation with Qi stagnation",
+        "Blood stasis"
+      ],
+      "sourceFile": "LEC 23 Perimenopausal syndrome, postpartum abdominal pain, postpartum convulsion.pdf"
+    },
+    {
+      "courseNumber": 96,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Postpartum Abdominal Pain",
+      "pinyin": "chan hou fu tong",
+      "subPatterns": [
+        "Blood deficiency",
+        "Blood stasis",
+        "Food retention"
+      ],
+      "sourceFile": "LEC 23 Perimenopausal syndrome, postpartum abdominal pain, postpartum convulsion.pdf"
+    },
+    {
+      "courseNumber": 97,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Postpartum Convulsion",
+      "pinyin": "chan hou jing zheng",
+      "subPatterns": [
+        "Blood and Yin deficiency with empty Wind",
+        "Exterior invasion of toxin"
+      ],
+      "sourceFile": "LEC 23 Perimenopausal syndrome, postpartum abdominal pain, postpartum convulsion.pdf"
+    },
+    {
+      "courseNumber": 98,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Postpartum Dizziness",
+      "pinyin": "chan hou xue yun",
+      "subPatterns": [
+        "Blood depletion with Qi desertion",
+        "Blood stasis with Qi blockage"
+      ],
+      "sourceFile": "LEC 24 Postpartum dizziness, fever, retention of urine, uterine prolapse.pdf"
+    },
+    {
+      "courseNumber": 99,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Postpartum Fever",
+      "pinyin": "chan hou fa re",
+      "subPatterns": [
+        "Invasion of external toxins",
+        "Invasion of external Wind",
+        "Blood deficiency",
+        "Blood stasis",
+        "Steaming breast",
+        "Food retention"
+      ],
+      "sourceFile": "LEC 24 Postpartum dizziness, fever, retention of urine, uterine prolapse.pdf"
+    },
+    {
+      "courseNumber": 100,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Postpartum Retention of Urine",
+      "pinyin": "chan hou pai niao yi chang",
+      "subPatterns": [
+        "Spleen Qi deficiency",
+        "Lung-Spleen Qi deficiency",
+        "Kidney Qi deficiency",
+        "Injury to Bladder"
+      ],
+      "sourceFile": "LEC 24 Postpartum dizziness, fever, retention of urine, uterine prolapse.pdf"
+    },
+    {
+      "courseNumber": 101,
+      "organSystem": "Gynecology and Obstetrics (Fu Ke)",
+      "diseaseName": "Uterine Prolapse",
+      "pinyin": "yin ting",
+      "subPatterns": [
+        "Spleen Qi deficiency",
+        "Kidney deficiency"
+      ],
+      "sourceFile": "LEC 24 Postpartum dizziness, fever, retention of urine, uterine prolapse.pdf"
+    }
+  ]
+}

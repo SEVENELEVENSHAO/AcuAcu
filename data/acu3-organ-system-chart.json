@@ -1,0 +1,151 @@
+{
+  "version": "0.1-draft",
+  "title": "Acu 3 Disease Chart By Organ System",
+  "status": "working_draft",
+  "sourceBasis": [
+    "Acu 3 acupuncture treatment roster from the table of contents of 针灸治疗学",
+    "Sub-patterns from the user's pasted organ-system draft where available"
+  ],
+  "appFields": [
+    "id",
+    "displayName",
+    "chineseName",
+    "pinyin",
+    "organSystem",
+    "sourceSection",
+    "patterns",
+    "patternStatus",
+    "redFlags",
+    "notes"
+  ],
+  "categories": [
+    {
+      "id": "lung_exterior_upper_respiratory",
+      "label": "Lung / Exterior / Upper Respiratory",
+      "diseases": [
+        {"id": "common_cold", "displayName": "Common Cold", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Wind-Cold", "Wind-Heat", "Summer-Heat Damp", "Qi Deficiency", "Yin Deficiency"]},
+        {"id": "cough", "displayName": "Cough", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Exterior Wind-Cold", "Exterior Wind-Heat", "Wind-Dryness", "Phlegm-Damp", "Phlegm-Heat", "Liver Fire insulting Lung", "Lung Yin Deficiency"]},
+        {"id": "asthma_wheezing", "displayName": "Asthma / Wheezing", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Cold-Wheezing", "Hot-Wheezing", "Lung Deficiency", "Spleen Deficiency", "Kidney Deficiency"]},
+        {"id": "dyspnea", "displayName": "Dyspnea", "sourceSection": "Reference extension", "patternStatus": "drafted", "patterns": ["Wind-Cold", "Phlegm-Heat", "Turbid Phlegm", "Liver Fire", "Lung Qi Deficiency", "Lung-Kidney Yang Deficiency", "Lung-Kidney Yin Deficiency"]},
+        {"id": "lung_distension", "displayName": "Lung Distension", "sourceSection": "Reference extension", "patternStatus": "drafted", "patterns": ["Phlegm-Turbidity", "Phlegm-Heat", "Phlegm veiling Heart Orifice", "Lung-Kidney Qi Deficiency", "Water Retention"]},
+        {"id": "pulmonary_abscess", "displayName": "Pulmonary Abscess", "sourceSection": "Reference extension", "patternStatus": "drafted", "patterns": ["Initial Wind-Heat", "Heat transformation", "Suppuration", "Recovery with Yin Deficiency"]},
+        {"id": "pulmonary_tuberculosis", "displayName": "Pulmonary Tuberculosis", "sourceSection": "Reference extension", "patternStatus": "drafted", "patterns": ["Lung Yin Deficiency", "Yin Deficiency with Fire", "Lung-Spleen Qi Deficiency", "Yin-Yang Deficiency"]},
+        {"id": "malaria_intermittent_fever", "displayName": "Malaria / Intermittent Fever", "sourceSection": "Internal medicine", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "sore_throat", "displayName": "Sore Throat", "sourceSection": "ENT", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "hoarseness_aphonia", "displayName": "Hoarseness / Aphonia", "sourceSection": "ENT", "patternStatus": "pending_extraction", "patterns": []}
+      ]
+    },
+    {
+      "id": "heart_mind_circulation_consciousness",
+      "label": "Heart / Mind / Circulation / Consciousness",
+      "diseases": [
+        {"id": "palpitations", "displayName": "Palpitations", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Heart Qi/Yang Deficiency", "Heart Blood/Yin Deficiency", "Heart Fire", "Phlegm-Fire", "Water overflowing to Heart", "Blood Stasis"]},
+        {"id": "chest_impediment_angina", "displayName": "Chest Impediment / Angina", "sourceSection": "Emergency / reference extension", "patternStatus": "drafted", "patterns": ["Qi Stagnation", "Blood Stasis", "Phlegm", "Cold Stagnation", "Qi Deficiency", "Yin Deficiency", "Yang Deficiency"]},
+        {"id": "insomnia", "displayName": "Insomnia", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Liver Fire", "Heart Fire", "Phlegm-Heat", "Residual Heat", "Heart-Spleen Blood Deficiency", "Heart Yin Deficiency", "Heart-Kidney disharmony", "Heart-Gallbladder Deficiency"]},
+        {"id": "depression", "displayName": "Depression", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Liver Qi Stagnation", "Stasis transforming into Fire", "Phlegm-Qi Obstruction", "Yin/Blood Deficiency"]},
+        {"id": "mania", "displayName": "Mania", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Phlegm-Fire harassing Heart", "Fire injuring Yin"]},
+        {"id": "epilepsy", "displayName": "Epilepsy", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Wind-Phlegm", "Phlegm-Fire", "Liver-Kidney Yin Deficiency", "Spleen-Stomach Qi Deficiency"]},
+        {"id": "wind_stroke", "displayName": "Wind Stroke", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Attack of Zang-Fu tense/closed pattern", "Attack of Zang-Fu flaccid/collapse pattern", "Attack of channels with hemiplegia", "Attack of channels with aphasia", "Attack of channels with facial paralysis"]},
+        {"id": "fainting_syncope", "displayName": "Fainting / Syncope", "sourceSection": "Emergency", "patternStatus": "drafted", "patterns": ["Qi Syncope", "Blood Syncope", "Phlegm Syncope", "Food Syncope", "Summer-Heat Syncope", "Deficiency Syncope"]},
+        {"id": "dementia", "displayName": "Dementia", "sourceSection": "Internal medicine", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "excessive_sleepiness", "displayName": "Excessive Sleepiness", "sourceSection": "Internal medicine", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "high_fever", "displayName": "High Fever", "sourceSection": "Emergency", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "convulsions", "displayName": "Convulsions", "sourceSection": "Emergency", "patternStatus": "pending_extraction", "patterns": []}
+      ]
+    },
+    {
+      "id": "spleen_stomach_intestines_metabolism",
+      "label": "Spleen / Stomach / Intestines / Metabolism",
+      "diseases": [
+        {"id": "epigastric_pain", "displayName": "Epigastric Pain / Stomach Pain", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Cold in Stomach", "Food Retention", "Liver Qi overacting on Stomach", "Stomach Fire", "Phlegm-Fire", "Damp-Heat", "Blood Stasis", "Spleen-Stomach Deficiency"]},
+        {"id": "vomiting", "displayName": "Vomiting", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Exterior Pathogen", "Food Retention", "Phlegm-Fluids", "Liver Qi overacting on Stomach", "Spleen-Stomach Deficiency", "Stomach Yin Deficiency"]},
+        {"id": "hiccup_belching", "displayName": "Hiccup / Belching", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Stomach Cold", "Stomach Fire", "Liver Qi Stagnation", "Food Retention", "Spleen-Stomach Yang Deficiency", "Stomach Yin Deficiency"]},
+        {"id": "abdominal_pain", "displayName": "Abdominal Pain", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Internal Cold", "Damp-Heat", "Food Retention", "Qi Stagnation", "Blood Stasis", "Deficiency-Cold"]},
+        {"id": "diarrhea", "displayName": "Diarrhea", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Cold-Damp", "Damp-Heat", "Food Retention", "Liver overacting on Spleen", "Spleen-Stomach Deficiency", "Kidney Yang Deficiency"]},
+        {"id": "dysentery", "displayName": "Dysentery", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Damp-Heat", "Cold-Damp", "Epidemic Toxic", "Food-refusal dysentery", "Intermittent dysentery", "Deficient-cold dysentery"]},
+        {"id": "constipation", "displayName": "Constipation", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Heat constipation", "Qi constipation", "Blood Deficiency", "Qi Deficiency", "Yang Deficiency", "Yin Deficiency", "Cold constipation"]},
+        {"id": "drum_distension", "displayName": "Drum Distension", "sourceSection": "Reference extension", "patternStatus": "drafted", "patterns": ["Qi Stagnation with Damp", "Cold-Damp obstructing Spleen", "Damp-Heat", "Spleen Qi Deficiency with Liver Blood Stasis", "Spleen-Kidney Yang Deficiency", "Liver-Kidney Yin Deficiency"]},
+        {"id": "abdominal_masses", "displayName": "Abdominal Masses", "sourceSection": "Reference extension", "patternStatus": "drafted", "patterns": ["Liver Qi Stagnation", "Food/Phlegm", "Blood Stasis knotted internally", "Upright Qi Deficiency with Stasis"]},
+        {"id": "irritable_bowel_syndrome", "displayName": "Irritable Bowel Syndrome", "sourceSection": "Internal medicine", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "anemia", "displayName": "Anemia", "sourceSection": "Internal medicine", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "diabetes_xiao_ke", "displayName": "Diabetes / Xiao Ke", "sourceSection": "Internal medicine", "patternStatus": "pending_extraction", "patterns": []}
+      ]
+    },
+    {
+      "id": "liver_gallbladder_head_eyes_wind",
+      "label": "Liver / Gallbladder / Head / Eyes / Wind",
+      "diseases": [
+        {"id": "hypochondriac_pain", "displayName": "Hypochondriac Pain", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Liver Qi Stagnation", "Blood Stasis", "Damp-Heat", "Liver Blood Deficiency", "Liver Yin Deficiency"]},
+        {"id": "jaundice", "displayName": "Jaundice", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Yang Jaundice: Damp-Heat with Heat predominant", "Yang Jaundice: Damp-Heat with Damp predominant", "Acute Heat Toxins", "Yin Jaundice: Cold-Damp"]},
+        {"id": "vertigo", "displayName": "Vertigo", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Liver Yang/Fire/Wind Rising", "Turbid Phlegm", "Qi-Blood Deficiency", "Kidney Essence Deficiency"]},
+        {"id": "headache", "displayName": "Headache", "sourceSection": "Pain disorders", "patternStatus": "drafted", "patterns": ["Exterior Wind-Cold", "Exterior Wind-Heat", "Exterior Wind-Damp", "Liver Yang Rising", "Liver Fire", "Liver Wind", "Liver Qi", "Cold in Liver", "Phlegm", "Food", "Blood Stasis", "Qi Deficiency", "Blood Deficiency", "Kidney Deficiency"]},
+        {"id": "goitre", "displayName": "Goitre / Thyroid Swelling", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Qi Stagnation with Phlegm", "Liver Fire with Phlegm-Heat", "Phlegm and Blood Stasis", "Yin Deficiency with Phlegm"]},
+        {"id": "tremor_parkinsonism", "displayName": "Tremor / Parkinsonism", "sourceSection": "Internal medicine", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "facial_pain", "displayName": "Facial Pain", "sourceSection": "Pain disorders", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "facial_paralysis", "displayName": "Facial Paralysis", "sourceSection": "Internal medicine", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "glaucoma", "displayName": "Glaucoma", "sourceSection": "Eye/ENT", "patternStatus": "pending_extraction", "patterns": []}
+      ]
+    },
+    {
+      "id": "kidney_bladder_male_reproductive_essence",
+      "label": "Kidney / Bladder / Male Reproductive / Essence",
+      "diseases": [
+        {"id": "urinary_retention", "displayName": "Urinary Retention / Ischuria", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Damp-Heat in Bladder", "Lung Heat Congestion", "Liver Qi Stagnation", "Spleen Qi Deficiency", "Kidney Yang Deficiency", "Urinary blockage"]},
+        {"id": "stranguria_lin", "displayName": "Stranguria / Lin Syndrome", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Heat Lin", "Stone Lin", "Qi Lin excess", "Qi Lin deficiency", "Blood Lin excess", "Blood Lin deficiency", "Cloudy Lin damp pattern", "Cloudy Lin deficiency pattern", "Fatigue Lin"]},
+        {"id": "edema", "displayName": "Edema", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Yang Edema: Wind-Water", "Yang Edema: Fire-Poison", "Yang Edema: Dampness", "Yang Edema: Damp-Heat", "Yin Edema: Spleen Yang Deficiency", "Yin Edema: Kidney Yang Deficiency"]},
+        {"id": "lumbago", "displayName": "Lumbago / Low Back Pain", "sourceSection": "Pain disorders", "patternStatus": "drafted", "patterns": ["Cold-Damp", "Qi-Blood Stagnation", "Kidney Yang Deficiency", "Kidney Yin Deficiency"]},
+        {"id": "seminal_emission", "displayName": "Seminal Emission", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Kidney Yin Deficiency with Fire", "Spleen-Kidney Qi Deficiency failing to secure", "Heart Fire", "Damp-Heat"]},
+        {"id": "impotence", "displayName": "Impotence", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Mingmen Fire Debility", "Damp-Heat pouring downward"]},
+        {"id": "tinnitus_deafness", "displayName": "Tinnitus / Deafness", "sourceSection": "ENT", "patternStatus": "drafted", "patterns": ["Liver-Gallbladder Fire", "Phlegm-Fire", "Kidney Essence Deficiency", "Upper Burner Qi Weakness", "Heart Blood Deficiency"]},
+        {"id": "urinary_incontinence", "displayName": "Urinary Incontinence", "sourceSection": "Internal medicine", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "chronic_prostatitis", "displayName": "Chronic Prostatitis", "sourceSection": "Internal medicine", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "male_infertility", "displayName": "Male Infertility", "sourceSection": "Internal medicine", "patternStatus": "pending_extraction", "patterns": []}
+      ]
+    },
+    {
+      "id": "gynecology_obstetrics",
+      "label": "Gynecology / Obstetrics",
+      "diseases": [
+        {"id": "dysmenorrhea", "displayName": "Dysmenorrhea", "sourceSection": "Gynecology", "patternStatus": "drafted", "patterns": ["Cold-Damp", "Liver Qi Stagnation", "Damp-Heat", "Yang Deficiency with Cold", "Liver-Kidney Deficiency", "Qi-Blood Deficiency"]},
+        {"id": "amenorrhea", "displayName": "Amenorrhea", "sourceSection": "Gynecology", "patternStatus": "drafted", "patterns": ["Liver-Kidney Deficiency", "Yin depletion with Blood Dryness", "Qi-Blood Deficiency", "Qi Stagnation with Blood Stasis", "Phlegm-Damp"]},
+        {"id": "metrorrhagia", "displayName": "Metrorrhagia / Uterine Bleeding", "sourceSection": "Gynecology", "patternStatus": "drafted", "patterns": ["Full Blood-Heat", "Empty Blood-Heat", "Liver Qi Stagnation turning Heat", "Blood Stasis", "Damp-Heat", "Spleen failing to hold Blood", "Kidney Yang Deficiency", "Kidney Yin Deficiency"]},
+        {"id": "morning_sickness", "displayName": "Morning Sickness / Pregnancy Nausea", "sourceSection": "Obstetrics", "patternStatus": "drafted", "patterns": ["Liver Qi overacting on Stomach", "Stomach Heat", "Phlegm accumulation", "Heart Qi Deficiency/Fire", "Stomach Yin Deficiency"]},
+        {"id": "irregular_menstruation", "displayName": "Irregular Menstruation", "sourceSection": "Gynecology", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "premenstrual_tension", "displayName": "Premenstrual Tension Syndrome", "sourceSection": "Gynecology", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "perimenopausal_syndrome", "displayName": "Perimenopausal Syndrome", "sourceSection": "Gynecology", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "leukorrhea", "displayName": "Leukorrhea", "sourceSection": "Gynecology", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "female_infertility", "displayName": "Female Infertility", "sourceSection": "Gynecology", "patternStatus": "pending_extraction", "patterns": []}
+      ]
+    },
+    {
+      "id": "musculoskeletal_trauma",
+      "label": "Bi / Wei / Musculoskeletal / Trauma",
+      "diseases": [
+        {"id": "bi_syndrome", "displayName": "Painful Obstruction / Bi Syndrome", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Wandering Bi/Wind", "Painful Bi/Cold", "Fixed Bi/Damp", "Heat Bi", "Chronic Phlegm-Stasis Bi", "Deficiency Bi"]},
+        {"id": "wei_syndrome", "displayName": "Atrophy / Wei Syndrome", "sourceSection": "Internal medicine", "patternStatus": "drafted", "patterns": ["Lung Heat injuring Fluids", "Damp-Heat", "Cold-Damp", "Spleen-Stomach Deficiency", "Spleen-Heart collapse", "Kidney-Liver Deficiency", "Blood Stasis"]},
+        {"id": "stiff_neck", "displayName": "Stiff Neck", "sourceSection": "Pain disorders", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "frozen_shoulder", "displayName": "Frozen Shoulder / Lou Jian Feng", "sourceSection": "Pain disorders", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "sciatica", "displayName": "Sciatica", "sourceSection": "Pain disorders", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "gout", "displayName": "Gout", "sourceSection": "Pain disorders", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "cervical_spondylosis", "displayName": "Cervical Spondylosis", "sourceSection": "Surgery/trauma", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "knee_osteoarthritis", "displayName": "Knee Osteoarthritis", "sourceSection": "Surgery/trauma", "patternStatus": "pending_extraction", "patterns": []}
+      ]
+    },
+    {
+      "id": "skin_external_ent_systemic",
+      "label": "Skin / External / ENT / Systemic",
+      "diseases": [
+        {"id": "urticaria", "displayName": "Urticaria", "sourceSection": "Dermatology", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "eczema", "displayName": "Eczema", "sourceSection": "Dermatology", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "herpes_zoster", "displayName": "Herpes Zoster", "sourceSection": "Dermatology", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "acne", "displayName": "Acne", "sourceSection": "Dermatology", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "mastitis", "displayName": "Mastitis / Breast Abscess", "sourceSection": "External medicine", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "hemorrhoids", "displayName": "Hemorrhoids", "sourceSection": "External medicine", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "bleeding_disorders", "displayName": "Bleeding Disorders", "sourceSection": "Emergency", "patternStatus": "drafted", "patterns": ["Epistaxis", "Hemoptysis", "Hematemesis", "Hematochezia", "Hematuria"]},
+        {"id": "internal_damage_fever", "displayName": "Internal Damage Fever", "sourceSection": "Reference extension", "patternStatus": "drafted", "patterns": ["Qi Stagnation", "Blood Stasis", "Qi Deficiency", "Blood Deficiency", "Yin Deficiency"]},
+        {"id": "tumors", "displayName": "Tumors / Cancer Support", "sourceSection": "Other disorders", "patternStatus": "pending_extraction", "patterns": []},
+        {"id": "aging", "displayName": "Aging / Anti-aging", "sourceSection": "Other disorders", "patternStatus": "pending_extraction", "patterns": []}
+      ]
+    }
+  ]
+}
