@@ -148,6 +148,26 @@ function colorForPrinciple(principle: string) {
   return principleStyles.find((style) => style.match.test(principle))?.color ?? "#26312d";
 }
 
+function pairTileStyle(color?: string): CSSProperties {
+  const contrastPairs: Record<string, [string, string]> = {
+    "#f0bf32": ["#2f5f8f", "#f6cf46"],
+    "#ff6b5f": ["#0b8f78", "#ff7569"],
+    "#089b78": ["#7a4fd6", "#0aa987"],
+    "#367395": ["#f0bf32", "#2f6f98"],
+    "#0f9f9a": ["#ff6b5f", "#129f9b"],
+    "#5b7cfa": ["#f0bf32", "#526fff"],
+    "#8a74ff": ["#f0bf32", "#8168f5"],
+    "#ff8a3d": ["#367395", "#ff9448"],
+    "#d94f7c": ["#089b78", "#db5a83"],
+    "#292929": ["#f0bf32", "#242424"],
+    "#6f647a": ["#f0bf32", "#6e607a"],
+    "#a77a33": ["#367395", "#ad8139"],
+    "#42a5d6": ["#ff8a3d", "#3e9ed0"],
+  };
+  const [first, second] = contrastPairs[color ?? ""] ?? ["#26312d", "#f0bf32"];
+  return { "--pair-color-a": first, "--pair-color-b": second } as CSSProperties;
+}
+
 function actionForPointInPattern(point: string, principle: string) {
   const meta = getPointMeta(point);
   const relevant = principleStyles.filter((style) => style.match.test(principle));
@@ -656,7 +676,7 @@ function CommonStrategy({ content }: { content: (typeof expandedContentByCourse)
                     <span
                       className={`strategy-pair-tile ${group.color ? "" : "neutral"}`}
                       key={`${group.label}-${pair.points.join("-")}`}
-                      style={{ "--pair-color": group.color ?? "#ece7de" } as CSSProperties}
+                      style={pairTileStyle(group.color)}
                     >
                       <span>{getPointMeta(pair.points[0]).code}</span>
                       <span>{getPointMeta(pair.points[1]).code}</span>
