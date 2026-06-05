@@ -20,6 +20,13 @@
       "englishTitle": "Chinese Herbal Pharmacology",
       "fileName": "[OCR]_中药药理学_20260312_2342.text.pdf",
       "sourceRole": "Pharmacology reference for modern actions, safety notes, and herb/formula mechanism support."
+    },
+    {
+      "id": "american-dragon",
+      "title": "American Dragon",
+      "englishTitle": "American Dragon Chinese Herbs and Formulas",
+      "fileName": "https://www.americandragon.com/HerbFormulaIndex2.html",
+      "sourceRole": "Preferred English terminology cross-check for formula names, herb names, actions, syndromes, manifestations, dosages, and modifications."
     }
   ]
 }
