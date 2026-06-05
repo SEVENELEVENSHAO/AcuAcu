@@ -477,9 +477,10 @@ p {
   border-radius: 999px;
   box-shadow: 2px 2px 0 #161616;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   min-height: 28px;
   overflow: hidden;
+  position: relative;
   text-align: center;
 }
 
@@ -497,13 +498,20 @@ p {
 
 .strategy-pair-tile b {
   align-items: center;
-  background: #fffaf2;
   color: #161616;
   display: flex;
   font-size: 0.78rem;
   font-weight: 900;
+  height: 100%;
   justify-content: center;
   line-height: 1;
+  left: 50%;
+  position: absolute;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.62);
+  top: 0;
+  transform: translateX(-50%);
+  width: 16px;
+  z-index: 1;
 }
 
 .strategy-pair-tile span:first-child {

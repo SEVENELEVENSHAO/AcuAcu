@@ -150,18 +150,18 @@ function colorForPrinciple(principle: string) {
 
 function pointPairStyle(firstPoint: string, secondPoint: string): CSSProperties {
   const palette = [
-    "#ec6f63",
-    "#2f87a3",
-    "#e2b33c",
-    "#0e9f83",
-    "#866bd8",
-    "#d75f91",
-    "#4f77e6",
-    "#cb7d36",
-    "#557568",
-    "#b85f54",
-    "#5d6fbd",
-    "#a0773d",
+    "#ff6b5f",
+    "#2f9cf4",
+    "#f0bf32",
+    "#08b98f",
+    "#8a74ff",
+    "#f05aa5",
+    "#5b7cfa",
+    "#ff8a3d",
+    "#1aa37a",
+    "#ff5757",
+    "#6c63ff",
+    "#d79b25",
   ];
 
   function colorIndexForPoint(point: string) {
