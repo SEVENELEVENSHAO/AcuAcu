@@ -463,22 +463,49 @@ p {
 
 .strategy-pair-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  grid-template-columns: repeat(auto-fill, 72px);
   gap: 6px;
+  justify-content: start;
 }
 
 .strategy-point-tile {
   min-height: auto;
 }
 
-.strategy-pair {
-  align-content: center;
-  aspect-ratio: 1.35;
+.strategy-pair-tile {
+  aspect-ratio: 1;
   border: 1.5px solid #161616;
+  border-radius: 10px;
   box-shadow: 2px 2px 0 #161616;
-  justify-items: center;
-  padding: 8px;
+  display: grid;
+  overflow: hidden;
   text-align: center;
+}
+
+.strategy-pair-tile span {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+  padding: 4px;
+  font-size: 0.76rem;
+  font-weight: 900;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.strategy-pair-tile span:first-child {
+  background: var(--pair-color);
+  color: #fff;
+}
+
+.strategy-pair-tile span:last-child {
+  background: #fffaf2;
+  color: #171d1a;
+}
+
+.strategy-pair-tile.neutral span:first-child {
+  color: #26312d;
 }
 
 .pattern-list {

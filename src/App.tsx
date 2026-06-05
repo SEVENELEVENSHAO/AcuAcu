@@ -653,8 +653,13 @@ function CommonStrategy({ content }: { content: (typeof expandedContentByCourse)
                 <span>Common pairings</span>
                 <div className="strategy-pair-list">
                   {group.pairs.map((pair) => (
-                    <span className="strategy-pair" key={`${group.label}-${pair.points.join("-")}`}>
-                      <strong>{pair.points.join(" + ")}</strong>
+                    <span
+                      className={`strategy-pair-tile ${group.color ? "" : "neutral"}`}
+                      key={`${group.label}-${pair.points.join("-")}`}
+                      style={{ "--pair-color": group.color ?? "#ece7de" } as CSSProperties}
+                    >
+                      <span>{getPointMeta(pair.points[0]).code}</span>
+                      <span>{getPointMeta(pair.points[1]).code}</span>
                     </span>
                   ))}
                 </div>
