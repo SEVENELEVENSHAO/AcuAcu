@@ -45,17 +45,26 @@ button {
   margin-bottom: 14px;
 }
 
-h1,
 h2,
 h3,
 p {
   margin-top: 0;
 }
 
-h1 {
-  margin-bottom: 0;
+.logo-button {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  font: inherit;
   font-size: 2.1rem;
+  font-weight: 900;
   line-height: 1.08;
+  margin-bottom: 0;
+  padding: 0;
+  text-align: left;
 }
 
 .search-wrap {
@@ -369,6 +378,96 @@ h1 {
   color: #9d2f28;
 }
 
+.common-strategy-section {
+  margin-top: 22px;
+}
+
+.common-strategy-section h3 {
+  color: #35423c;
+  font-size: 0.88rem;
+  margin-bottom: 10px;
+}
+
+.strategy-groups {
+  display: grid;
+  gap: 10px;
+}
+
+.strategy-group {
+  border: 1.5px solid #161616;
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 #161616;
+  overflow: hidden;
+}
+
+.strategy-group-head {
+  background: var(--strategy-color);
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 900;
+  padding: 9px 11px;
+}
+
+.strategy-group.neutral .strategy-group-head {
+  color: #26312d;
+}
+
+.strategy-block {
+  background: rgba(255, 250, 242, 0.94);
+  display: grid;
+  gap: 7px;
+  padding: 10px 11px;
+}
+
+.strategy-block + .strategy-block {
+  border-top: 1px solid rgba(22, 22, 22, 0.14);
+}
+
+.strategy-block > span {
+  color: #68736d;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.strategy-point-grid {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+}
+
+.strategy-point,
+.strategy-pair {
+  background: #fff;
+  border: 1px solid rgba(22, 22, 22, 0.18);
+  border-radius: 8px;
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: 7px 8px;
+}
+
+.strategy-point strong,
+.strategy-pair strong {
+  color: #1f2a25;
+  font-size: 0.84rem;
+  font-weight: 900;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.strategy-point small,
+.strategy-pair small {
+  color: #67716c;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.strategy-pair-list {
+  display: grid;
+  gap: 6px;
+}
+
 .pattern-list {
   display: flex;
   flex-wrap: wrap;
@@ -617,7 +716,7 @@ h1 {
     padding: 28px 22px;
   }
 
-  h1 {
+  .logo-button {
     font-size: 2.45rem;
   }
 

@@ -130,8 +130,116 @@ function pointGroupsFor(principle: string, pointsText: string) {
   return Array.from(groups.values());
 }
 
+function styleForAction(action: PointAction) {
+  return principleStyles.find((style) => style.action === action);
+}
+
 function colorForPrinciple(principle: string) {
   return principleStyles.find((style) => style.match.test(principle))?.color ?? "#26312d";
+}
+
+function actionForPointInPattern(point: string, principle: string) {
+  const meta = getPointMeta(point);
+  const relevant = principleStyles.filter((style) => style.match.test(principle));
+  const matched = relevant.find((style) => meta.actions.includes(style.action));
+  if (matched) return matched;
+
+  const fallback = meta.actions.map(styleForAction).find(Boolean);
+  return fallback ?? null;
+}
+
+function commonPointStrategy(content: (typeof expandedContentByCourse)[number]) {
+  const pointMap = new Map<
+    string,
+    {
+      code: string;
+      count: number;
+      actions: Map<PointAction | "neutral", number>;
+    }
+  >();
+  const pairMap = new Map<
+    string,
+    {
+      points: [string, string];
+      count: number;
+      actions: Map<PointAction | "neutral", number>;
+    }
+  >();
+
+  for (const pattern of content.patterns) {
+    const points = extractPoints(pattern.points);
+
+    for (const point of points) {
+      const actionStyle = actionForPointInPattern(point, pattern.principle);
+      const action = actionStyle?.action ?? "neutral";
+      const entry = pointMap.get(point) ?? { code: point, count: 0, actions: new Map() };
+      entry.count += 1;
+      entry.actions.set(action, (entry.actions.get(action) ?? 0) + 1);
+      pointMap.set(point, entry);
+    }
+
+    for (let i = 0; i < points.length; i += 1) {
+      for (let j = i + 1; j < points.length; j += 1) {
+        const pair = [points[i], points[j]].sort() as [string, string];
+        const key = pair.join("|");
+        const firstAction = actionForPointInPattern(pair[0], pattern.principle)?.action;
+        const secondAction = actionForPointInPattern(pair[1], pattern.principle)?.action;
+        const action = firstAction && firstAction === secondAction
+          ? firstAction
+          : principleStyles.find((style) => style.match.test(pattern.principle))?.action ?? "neutral";
+        const entry = pairMap.get(key) ?? { points: pair, count: 0, actions: new Map() };
+        entry.count += 1;
+        entry.actions.set(action, (entry.actions.get(action) ?? 0) + 1);
+        pairMap.set(key, entry);
+      }
+    }
+  }
+
+  const commonPoints = Array.from(pointMap.values())
+    .sort((a, b) => b.count - a.count || a.code.localeCompare(b.code))
+    .filter((point, index) => point.count > 1 || index < 6);
+
+  const commonPairs = Array.from(pairMap.values())
+    .sort((a, b) => b.count - a.count || a.points.join(" ").localeCompare(b.points.join(" ")))
+    .filter((pair, index) => pair.count > 1 || index < 6)
+    .slice(0, 12);
+
+  function dominantAction(actions: Map<PointAction | "neutral", number>) {
+    return Array.from(actions.entries()).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "neutral";
+  }
+
+  const groups = new Map<
+    string,
+    {
+      label: string;
+      color?: string;
+      points: typeof commonPoints;
+      pairs: typeof commonPairs;
+    }
+  >();
+
+  function groupFor(action: PointAction | "neutral") {
+    const style = action === "neutral" ? null : styleForAction(action);
+    const key = action;
+    const group = groups.get(key) ?? {
+      label: style?.label ?? "General Strategy",
+      color: style?.color,
+      points: [],
+      pairs: [],
+    };
+    groups.set(key, group);
+    return group;
+  }
+
+  for (const point of commonPoints) {
+    groupFor(dominantAction(point.actions)).points.push(point);
+  }
+
+  for (const pair of commonPairs) {
+    groupFor(dominantAction(pair.actions)).pairs.push(pair);
+  }
+
+  return Array.from(groups.values()).filter((group) => group.points.length || group.pairs.length);
 }
 
 function normalize(value: string) {
@@ -232,7 +340,9 @@ export function App() {
     <main className="app-shell">
       <section className="workspace">
         <header className="app-header">
-          <h1>AcuAcu</h1>
+          <button className="logo-button" onClick={clearQuery} type="button">
+            AcuAcu
+          </button>
         </header>
 
         <div className="search-wrap">
@@ -375,6 +485,8 @@ function DiseaseDetail({
         </section>
       )}
 
+      {expandedContent && <CommonStrategy content={expandedContent} />}
+
       {expandedContent?.redFlags && (
         <section className="red-flag-section">
           <h3>Red Flags</h3>
@@ -470,6 +582,59 @@ function DiseaseDetail({
         <p>{condition.sourceFile}</p>
       </section>
     </div>
+  );
+}
+
+function CommonStrategy({ content }: { content: (typeof expandedContentByCourse)[number] }) {
+  const groups = commonPointStrategy(content);
+  if (groups.length === 0) return null;
+
+  return (
+    <section className="common-strategy-section">
+      <h3>Common Strategy</h3>
+      <div className="strategy-groups">
+        {groups.map((group) => (
+          <article
+            className={`strategy-group ${group.color ? "" : "neutral"}`}
+            key={group.label}
+            style={{ "--strategy-color": group.color ?? "#ece7de" } as CSSProperties}
+          >
+            <div className="strategy-group-head">{group.label}</div>
+            {group.points.length > 0 && (
+              <div className="strategy-block">
+                <span>Common points</span>
+                <div className="strategy-point-grid">
+                  {group.points.map((point) => {
+                    const meta = getPointMeta(point.code);
+                    return (
+                      <span className="strategy-point" key={`${group.label}-${point.code}`}>
+                        <strong>{meta.chineseName}</strong>
+                        <small>
+                          {meta.code} · {point.count}x
+                        </small>
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+            {group.pairs.length > 0 && (
+              <div className="strategy-block">
+                <span>Common pairings</span>
+                <div className="strategy-pair-list">
+                  {group.pairs.map((pair) => (
+                    <span className="strategy-pair" key={`${group.label}-${pair.points.join("-")}`}>
+                      <strong>{pair.points.join(" + ")}</strong>
+                      <small>{pair.count}x across patterns</small>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
