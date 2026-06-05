@@ -148,23 +148,37 @@ function colorForPrinciple(principle: string) {
   return principleStyles.find((style) => style.match.test(principle))?.color ?? "#26312d";
 }
 
-function pairTileStyle(color?: string): CSSProperties {
-  const contrastPairs: Record<string, [string, string]> = {
-    "#f0bf32": ["#2f5f8f", "#f6cf46"],
-    "#ff6b5f": ["#0b8f78", "#ff7569"],
-    "#089b78": ["#7a4fd6", "#0aa987"],
-    "#367395": ["#f0bf32", "#2f6f98"],
-    "#0f9f9a": ["#ff6b5f", "#129f9b"],
-    "#5b7cfa": ["#f0bf32", "#526fff"],
-    "#8a74ff": ["#f0bf32", "#8168f5"],
-    "#ff8a3d": ["#367395", "#ff9448"],
-    "#d94f7c": ["#089b78", "#db5a83"],
-    "#292929": ["#f0bf32", "#242424"],
-    "#6f647a": ["#f0bf32", "#6e607a"],
-    "#a77a33": ["#367395", "#ad8139"],
-    "#42a5d6": ["#ff8a3d", "#3e9ed0"],
-  };
-  const [first, second] = contrastPairs[color ?? ""] ?? ["#26312d", "#f0bf32"];
+function pointPairStyle(firstPoint: string, secondPoint: string): CSSProperties {
+  const palette = [
+    "#ec6f63",
+    "#2f87a3",
+    "#e2b33c",
+    "#0e9f83",
+    "#866bd8",
+    "#d75f91",
+    "#4f77e6",
+    "#cb7d36",
+    "#557568",
+    "#b85f54",
+    "#5d6fbd",
+    "#a0773d",
+  ];
+
+  function colorIndexForPoint(point: string) {
+    const total = Array.from(point).reduce((sum, char) => sum + char.charCodeAt(0), 0);
+    return total % palette.length;
+  }
+
+  const firstIndex = colorIndexForPoint(firstPoint);
+  let secondIndex = colorIndexForPoint(secondPoint);
+  const distance = Math.abs(firstIndex - secondIndex);
+  if (distance < 3 || distance > palette.length - 3) {
+    secondIndex = (secondIndex + Math.floor(palette.length / 2)) % palette.length;
+  }
+
+  const first = palette[firstIndex];
+  const second = palette[secondIndex];
+
   return { "--pair-color-a": first, "--pair-color-b": second } as CSSProperties;
 }
 
@@ -676,9 +690,10 @@ function CommonStrategy({ content }: { content: (typeof expandedContentByCourse)
                     <span
                       className={`strategy-pair-tile ${group.color ? "" : "neutral"}`}
                       key={`${group.label}-${pair.points.join("-")}`}
-                      style={pairTileStyle(group.color)}
+                      style={pointPairStyle(pair.points[0], pair.points[1])}
                     >
                       <span>{getPointMeta(pair.points[0]).code}</span>
+                      <b aria-hidden="true">+</b>
                       <span>{getPointMeta(pair.points[1]).code}</span>
                     </span>
                   ))}

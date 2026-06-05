@@ -463,7 +463,7 @@ p {
 
 .strategy-pair-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
   gap: 6px;
   justify-content: start;
 }
@@ -473,12 +473,12 @@ p {
 }
 
 .strategy-pair-tile {
-  border: 1.5px solid #161616;
-  border-radius: 10px;
+  border: 1.3px solid #161616;
+  border-radius: 999px;
   box-shadow: 2px 2px 0 #161616;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 38px;
+  grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr);
+  min-height: 28px;
   overflow: hidden;
   text-align: center;
 }
@@ -488,11 +488,22 @@ p {
   display: flex;
   justify-content: center;
   min-width: 0;
-  padding: 5px 6px;
-  font-size: 0.76rem;
+  padding: 4px 6px;
+  font-size: 0.7rem;
   font-weight: 900;
   line-height: 1.05;
   overflow-wrap: anywhere;
+}
+
+.strategy-pair-tile b {
+  align-items: center;
+  background: #fffaf2;
+  color: #161616;
+  display: flex;
+  font-size: 0.78rem;
+  font-weight: 900;
+  justify-content: center;
+  line-height: 1;
 }
 
 .strategy-pair-tile span:first-child {
