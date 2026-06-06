@@ -1,8 +1,14 @@
-import { ArrowLeft, BookOpen, ChevronRight, Search } from "lucide-react";
+import {
+  ArrowLeft,
+  BookOpen,
+  ChevronRight,
+  Search,
+} from "lucide-react";
 import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 import acuData from "../data/acu3-course-organ-system-chart.json";
 import { channelContent } from "./channelContent";
+import { auditConditionContent } from "./clinicalAudit";
 import { gyneContent } from "./gyneContent";
 import { heartContent } from "./heartContent";
 import { kidneyContent } from "./kidneyContent";
@@ -45,7 +51,7 @@ type BigPattern = {
 
 const bigPatternsSystem = "Big Patterns";
 const dataset = acuData as AcuDataset;
-const expandedContentByCourse = {
+const rawContentByCourse = {
   ...lungContent,
   ...heartContent,
   ...spleenContent,
@@ -55,6 +61,14 @@ const expandedContentByCourse = {
   ...channelContent,
   ...gyneContent,
 };
+const expandedContentByCourse = Object.fromEntries(
+  dataset.items.flatMap((condition) => {
+    const content = rawContentByCourse[condition.courseNumber];
+    return content
+      ? [[condition.courseNumber, auditConditionContent(condition, content)]]
+      : [];
+  }),
+) as typeof rawContentByCourse;
 const categoryOrder = [
   "Lung System Disorders",
   "Heart and Mind Disorders",
@@ -968,7 +982,12 @@ function BigPatternDetail({
                       </div>
                     )}
                     <p><strong>Principle:</strong> {pattern.principle}</p>
-                    <PointPrescription principle={pattern.principle} pointsText={pattern.points} />
+                    <PointPrescription
+                      additions={pattern.pointAdditions}
+                      principle={pattern.principle}
+                      pointsText={pattern.points}
+                      techniques={pattern.techniques}
+                    />
                     {pattern.formula && (
                       <div className="comparison-formula">
                         <strong>{pattern.formula.chineseName}</strong>
@@ -1015,13 +1034,6 @@ function DiseaseDetail({
       </div>
       <h2>{condition.diseaseName}</h2>
       <p className="pinyin">{condition.pinyin}</p>
-
-      {expandedContent && (
-        <section className="content-section">
-          <h3>Overview</h3>
-          <p>{expandedContent.overview}</p>
-        </section>
-      )}
 
       {expandedContent && <CommonStrategy content={expandedContent} />}
 
@@ -1083,7 +1095,12 @@ function DiseaseDetail({
                       {openPattern === patternKey && (
                         <div className="pattern-card-body">
                           <p><strong>Principle:</strong> {pattern.principle}</p>
-                          <PointPrescription principle={pattern.principle} pointsText={pattern.points} />
+                          <PointPrescription
+                            additions={pattern.pointAdditions}
+                            principle={pattern.principle}
+                            pointsText={pattern.points}
+                            techniques={pattern.techniques}
+                          />
                           {pattern.formula && (
                             <FormulaCard formula={pattern.formula} color={colorForPrinciple(pattern.principle)} />
                           )}
@@ -1254,17 +1271,22 @@ function FormulaCard({
 }
 
 function PointPrescription({
+  additions = [],
   principle,
   pointsText,
+  techniques = [],
 }: {
+  additions?: NonNullable<(typeof expandedContentByCourse)[number]>["patterns"][number]["pointAdditions"];
   principle: string;
   pointsText: string;
+  techniques?: NonNullable<(typeof expandedContentByCourse)[number]>["patterns"][number]["techniques"];
 }) {
   const groups = pointGroupsFor(principle, pointsText);
+  const additionColor = colorForPrinciple(principle);
 
   return (
     <div className="point-prescription">
-      <strong>Points</strong>
+      <strong>Core Points</strong>
       {groups.map((group) => (
         <div className="point-group" key={group.label}>
           <div className="point-group-label">{group.label}</div>
@@ -1286,6 +1308,42 @@ function PointPrescription({
         </div>
       ))}
       {extractPoints(pointsText).length === 0 && <p>{pointsText}</p>}
+      {additions.length > 0 && (
+        <div className="point-additions">
+          <strong>Additions</strong>
+          {additions.map((addition) => (
+            <div className="point-addition" key={`${addition.indication}-${addition.points}`}>
+              <span>{addition.indication}</span>
+              <div className="point-grid">
+                {extractPoints(addition.points).map((point) => {
+                  const meta = getPointMeta(point);
+                  return (
+                    <span
+                      className={pointTileClass(point)}
+                      key={`${addition.indication}-${point}`}
+                      style={{ "--point-color": additionColor } as CSSProperties}
+                    >
+                      <span className="point-name">{meta.chineseName}</span>
+                      <span className="point-code">{meta.code}</span>
+                    </span>
+                  );
+                })}
+              </div>
+              {extractPoints(addition.points).length === 0 && <p>{addition.points}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+      {techniques.length > 0 && (
+        <div className="technique-notes">
+          <strong>Technique</strong>
+          <ul>
+            {techniques.map((technique) => (
+              <li key={technique}>{technique}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

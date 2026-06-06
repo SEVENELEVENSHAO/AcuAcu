@@ -19,15 +19,39 @@ export type LungPatternDetail = {
   section?: string;
   principle: string;
   points: string;
+  pointAdditions?: PointAddition[];
+  techniques?: string[];
   formula?: FormulaDetail;
   notes?: string;
+  sourceAudit?: SourceAudit;
+};
+
+export type PointAddition = {
+  indication: string;
+  points: string;
+};
+
+export type SourceAudit = {
+  document: string;
+  page?: number;
+  section: string;
+};
+
+export type ClinicalSummary = {
+  definition: string;
+  causes: string;
+  locationAndMechanism: string;
+  treatmentRule: string;
+  clinicalPearl: string;
 };
 
 export type LungConditionDetail = {
   overview: string;
+  clinicalSummary?: ClinicalSummary;
   tcmNotes?: string[];
   redFlags?: string[];
   patterns: LungPatternDetail[];
+  sourceAudit?: SourceAudit;
 };
 
 const formulas = {
