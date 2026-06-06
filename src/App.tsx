@@ -2,9 +2,13 @@ import { ArrowLeft, BookOpen, ChevronRight, Search } from "lucide-react";
 import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 import acuData from "../data/acu3-course-organ-system-chart.json";
+import { channelContent } from "./channelContent";
+import { gyneContent } from "./gyneContent";
 import { heartContent } from "./heartContent";
+import { kidneyContent } from "./kidneyContent";
 import { liverContent } from "./liverContent";
 import { lungContent, type FormulaDetail } from "./lungContent";
+import { qiBloodContent } from "./qiBloodContent";
 import { spleenContent } from "./spleenContent";
 import { extractPoints, getPointMeta, type PointAction } from "./pointMeta";
 
@@ -29,12 +33,27 @@ type SystemGroup = {
   items: AcuCondition[];
 };
 
+type BigPattern = {
+  name: string;
+  key: string;
+  diseaseCount: number;
+  occurrences: Array<{
+    condition: AcuCondition;
+    pattern: NonNullable<(typeof expandedContentByCourse)[number]>["patterns"][number];
+  }>;
+};
+
+const bigPatternsSystem = "Big Patterns";
 const dataset = acuData as AcuDataset;
 const expandedContentByCourse = {
   ...lungContent,
   ...heartContent,
   ...spleenContent,
   ...liverContent,
+  ...kidneyContent,
+  ...qiBloodContent,
+  ...channelContent,
+  ...gyneContent,
 };
 const categoryOrder = [
   "Lung System Disorders",
@@ -56,6 +75,7 @@ const categoryIcons: Record<string, string> = {
   "Qi, Blood, and Fluid Disorders": "🩸",
   "Channel and Body Disorders": "🧍",
   "Gynecology and Obstetrics (Fu Ke)": "🌙",
+  [bigPatternsSystem]: "🧩",
 };
 
 const cardColors = ["#f0bf32", "#089b78", "#ff6b5f", "#367395", "#8a74ff", "#91c8f5"];
@@ -342,6 +362,79 @@ const herbProperties: Record<string, HerbProperty> = {
   夜交藤: "neutral",
   益母草: "cool",
   知母: "cold",
+  巴戟天: "warm",
+  萆薢: "neutral",
+  萹蓄: "cool",
+  槟榔: "warm",
+  草果: "warm",
+  赤小豆: "neutral",
+  灯心草: "cold",
+  冬葵子: "cold",
+  茯苓皮: "neutral",
+  椒目: "warm",
+  橘皮: "warm",
+  莲须: "neutral",
+  麻黄: "warm",
+  没药: "neutral",
+  木瓜: "warm",
+  藕节: "neutral",
+  芡实: "neutral",
+  秦艽: "neutral",
+  瞿麦: "cold",
+  桑白皮: "cold",
+  沙苑蒺藜: "warm",
+  山栀子仁: "cold",
+  商陆: "cold",
+  生姜皮: "cool",
+  生梓白皮: "cold",
+  石韦: "cool",
+  王不留行: "neutral",
+  乌药: "warm",
+  小蓟: "cool",
+  益智仁: "warm",
+  猪苓: "neutral",
+  白茅根: "cold",
+  百合: "cold",
+  鳖甲: "cool",
+  侧柏叶: "cold",
+  大戟: "cold",
+  大蓟: "cool",
+  覆盆子: "warm",
+  甘遂: "cold",
+  干地黄: "cold",
+  荷叶: "neutral",
+  苦桔梗: "neutral",
+  茜草根: "cold",
+  苇根: "cold",
+  细生地: "cold",
+  芫花: "warm",
+  灶心黄土: "warm",
+  竹叶心: "cold",
+  棕榈皮: "neutral",
+  川乌: "hot",
+  防己: "cold",
+  蜂蜜: "neutral",
+  胡麻仁: "neutral",
+  虎骨: "warm",
+  枇杷叶: "cool",
+  锁阳: "warm",
+  威灵仙: "warm",
+  白果: "neutral",
+  椿根皮: "cold",
+  地骨皮: "cold",
+  官桂: "hot",
+  黑芥穗: "warm",
+  漏芦: "cold",
+  蒲公英: "cold",
+  七孔猪蹄: "neutral",
+  全当归: "warm",
+  通草: "cool",
+  小茴香: "warm",
+  续断: "warm",
+  延胡索: "warm",
+  野菊花: "cool",
+  紫背天葵子: "cold",
+  紫花地丁: "cold",
 };
 
 function propertyForIngredient(chineseName: string): HerbProperty {
@@ -553,10 +646,70 @@ function groupBySystem(items: AcuCondition[]) {
     });
 }
 
+function bigPatternKey(name: string) {
+  return displayPatternTitle(name)
+    .toLowerCase()
+    .replace(/\s*\/\s*/g, " / ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const deficiencyMasters = [
+  "Qi Deficiency",
+  "Blood Deficiency",
+  "Yin Deficiency",
+  "Yang Deficiency",
+] as const;
+
+function bigPatternMaster(name: string) {
+  const title = displayPatternTitle(name);
+  if (/\b(Qi|Blood|Yin|Yang)\s+and\s+(Qi|Blood|Yin|Yang)\s+Deficiency\b/i.test(title)) {
+    return title;
+  }
+
+  const classificationTitle = title.replace(/\bYang Qi Deficiency\b/gi, "Yang Deficiency");
+  const matchingMasters = deficiencyMasters.filter((master) =>
+    new RegExp(`\\b${master}\\b`, "i").test(classificationTitle),
+  );
+
+  return matchingMasters.length === 1 ? matchingMasters[0] : title;
+}
+
+function collectBigPatterns() {
+  const patternMap = new Map<string, BigPattern>();
+
+  for (const condition of dataset.items) {
+    const content = expandedContentByCourse[condition.courseNumber];
+    if (!content) continue;
+
+    for (const pattern of content.patterns) {
+      const masterName = bigPatternMaster(pattern.name);
+      const key = bigPatternKey(masterName);
+      const entry = patternMap.get(key) ?? {
+        name: masterName,
+        key,
+        diseaseCount: 0,
+        occurrences: [],
+      };
+      entry.occurrences.push({ condition, pattern });
+      patternMap.set(key, entry);
+    }
+  }
+
+  return Array.from(patternMap.values())
+    .map((entry) => ({
+      ...entry,
+      diseaseCount: new Set(entry.occurrences.map(({ condition }) => condition.courseNumber)).size,
+    }))
+    .filter((entry) => entry.diseaseCount >= 2)
+    .sort((a, b) => b.diseaseCount - a.diseaseCount || a.name.localeCompare(b.name));
+}
+
 export function App() {
   const [query, setQuery] = useState("");
   const [activeSystem, setActiveSystem] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedBigPattern, setSelectedBigPattern] = useState<string | null>(null);
 
   const filteredItems = useMemo(() => {
     const items = [...dataset.items].sort((a, b) => a.courseNumber - b.courseNumber);
@@ -565,23 +718,32 @@ export function App() {
   }, [query]);
 
   const groups = useMemo(() => groupBySystem(filteredItems), [filteredItems]);
+  const bigPatterns = useMemo(() => collectBigPatterns(), []);
+  const activeBigPattern = bigPatterns.find((pattern) => pattern.key === selectedBigPattern) ?? null;
   const selectedCondition =
     filteredItems.find((item) => item.courseNumber === selectedId) ??
     dataset.items.find((item) => item.courseNumber === selectedId) ??
     null;
 
   const activeGroup = groups.find((group) => group.name === activeSystem);
-  const mobilePanel = selectedCondition ? "detail" : activeGroup ? "diseases" : "systems";
+  const isBigPatterns = activeSystem === bigPatternsSystem;
+  const mobilePanel = selectedCondition || activeBigPattern
+    ? "detail"
+    : activeGroup || isBigPatterns
+      ? "diseases"
+      : "systems";
 
   function chooseSystem(systemName: string) {
     setActiveSystem(systemName);
     setSelectedId(null);
+    setSelectedBigPattern(null);
   }
 
   function clearQuery() {
     setQuery("");
     setActiveSystem(null);
     setSelectedId(null);
+    setSelectedBigPattern(null);
   }
 
   return (
@@ -598,10 +760,11 @@ export function App() {
           <input
             aria-label="Search conditions and patterns"
             value={query}
-            onChange={(event) => {
-              setQuery(event.target.value);
-              setActiveSystem(null);
-              setSelectedId(null);
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setActiveSystem(null);
+                setSelectedId(null);
+                setSelectedBigPattern(null);
             }}
             placeholder="Search disease, pinyin, pattern..."
           />
@@ -635,6 +798,20 @@ export function App() {
                     <ChevronRight size={18} aria-hidden="true" />
                   </button>
                 ))}
+                {!query && (
+                  <button
+                    className={`system-row ${isBigPatterns ? "active" : ""}`}
+                    onClick={() => chooseSystem(bigPatternsSystem)}
+                    type="button"
+                  >
+                    <span className="system-icon" aria-hidden="true">🧩</span>
+                    <span>
+                      <strong>Big Patterns</strong>
+                      <small>{bigPatterns.length} shared patterns</small>
+                    </span>
+                    <ChevronRight size={18} aria-hidden="true" />
+                  </button>
+                )}
               </div>
             )}
           </nav>
@@ -646,10 +823,31 @@ export function App() {
             </button>
             <div className="panel-title">
               <BookOpen size={18} aria-hidden="true" />
-              <h2>{activeGroup?.name ?? "Choose a system"}</h2>
+              <h2>{isBigPatterns ? bigPatternsSystem : activeGroup?.name ?? "Choose a system"}</h2>
             </div>
 
-            {!activeGroup ? (
+            {isBigPatterns ? (
+              <div className="disease-list">
+                {bigPatterns.map((pattern, index) => (
+                  <button
+                    className={`disease-row big-pattern-row ${
+                      pattern.key === selectedBigPattern ? "active" : ""
+                    }`}
+                    style={cardStyle(index)}
+                    key={pattern.key}
+                    onClick={() => setSelectedBigPattern(pattern.key)}
+                    type="button"
+                  >
+                    <span className="big-pattern-count">{pattern.diseaseCount}</span>
+                    <span>
+                      <strong>{pattern.name}</strong>
+                      <small>Shared across {pattern.diseaseCount} diseases</small>
+                    </span>
+                    <ChevronRight className="disease-arrow" size={18} aria-hidden="true" />
+                  </button>
+                ))}
+              </div>
+            ) : !activeGroup ? (
               <div className="empty-state">Choose an organ system to view its conditions.</div>
             ) : (
               <div className="disease-list">
@@ -667,7 +865,10 @@ export function App() {
                     <span>
                       <strong>{condition.diseaseName}</strong>
                       <small>{condition.pinyin}</small>
-                      <em>{condition.subPatterns.length} patterns</em>
+                      <em>
+                        {expandedContentByCourse[condition.courseNumber]?.patterns.length ??
+                          condition.subPatterns.length} patterns
+                      </em>
                     </span>
                     <ChevronRight className="disease-arrow" size={18} aria-hidden="true" />
                   </button>
@@ -677,7 +878,13 @@ export function App() {
           </section>
 
           <article className="detail-panel" aria-label="Disease details">
-            {selectedCondition ? (
+            {activeBigPattern ? (
+              <BigPatternDetail
+                key={activeBigPattern.key}
+                bigPattern={activeBigPattern}
+                onBack={() => setSelectedBigPattern(null)}
+              />
+            ) : selectedCondition ? (
               <DiseaseDetail
                 condition={selectedCondition}
                 onBack={() => setSelectedId(null)}
@@ -685,14 +892,97 @@ export function App() {
             ) : (
               <div className="detail-placeholder">
                 <BookOpen size={28} aria-hidden="true" />
-                <h2>Choose a condition</h2>
-                <p>Open any organ system, then select a disease to review its Acu 3 sub-patterns.</p>
+                <h2>{isBigPatterns ? "Choose a big pattern" : "Choose a condition"}</h2>
+                <p>
+                  {isBigPatterns
+                    ? "Select a shared pattern to compare how it appears across diseases."
+                    : "Open any organ system, then select a disease to review its Acu 3 sub-patterns."}
+                </p>
               </div>
             )}
           </article>
         </div>
       </section>
     </main>
+  );
+}
+
+function BigPatternDetail({
+  bigPattern,
+  onBack,
+}: {
+  bigPattern: BigPattern;
+  onBack: () => void;
+}) {
+  const [openComparison, setOpenComparison] = useState<string | null>(null);
+
+  return (
+    <div className="detail-card big-pattern-detail">
+      <button className="back-button detail-back" onClick={onBack} type="button">
+        <ArrowLeft size={18} aria-hidden="true" />
+        Big Patterns
+      </button>
+
+      <div className="detail-kicker">
+        <span>Shared Pattern</span>
+        <span>{bigPattern.diseaseCount} diseases</span>
+      </div>
+      <h2>{bigPattern.name}</h2>
+      <p className="pinyin">Cross-disease comparison</p>
+
+      <section className="pattern-section">
+        <h3>Appears In</h3>
+        <div className="big-pattern-comparisons">
+          {bigPattern.occurrences.map(({ condition, pattern }, index) => {
+            const comparisonKey = `${condition.courseNumber}-${pattern.section ?? ""}-${pattern.name}`;
+            const isOpen = openComparison === comparisonKey;
+
+            return (
+              <article
+                className="big-pattern-comparison"
+                data-open={isOpen}
+                key={comparisonKey}
+                style={cardStyle(index)}
+              >
+                <button
+                  aria-expanded={isOpen}
+                  className="big-pattern-comparison-summary"
+                  onClick={() => setOpenComparison(isOpen ? null : comparisonKey)}
+                  type="button"
+                >
+                  <span className="comparison-course">#{condition.courseNumber}</span>
+                  <span className="comparison-condition">
+                    <strong>{condition.diseaseName}</strong>
+                    <small>{condition.organSystem}</small>
+                  </span>
+                  <ChevronRight size={18} aria-hidden="true" />
+                </button>
+
+                {isOpen && (
+                  <div className="big-pattern-comparison-body">
+                    {pattern.section && <div className="comparison-section">{pattern.section}</div>}
+                    {displayPatternTitle(pattern.name) !== bigPattern.name && (
+                      <div className="comparison-specific-pattern">
+                        <span>Pattern</span>
+                        <strong>{displayPatternTitle(pattern.name)}</strong>
+                      </div>
+                    )}
+                    <p><strong>Principle:</strong> {pattern.principle}</p>
+                    <PointPrescription principle={pattern.principle} pointsText={pattern.points} />
+                    {pattern.formula && (
+                      <div className="comparison-formula">
+                        <strong>{pattern.formula.chineseName}</strong>
+                        <span>{pattern.formula.pinyin}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    </div>
   );
 }
 
@@ -708,8 +998,8 @@ function DiseaseDetail({
   const expandedContent = expandedContentByCourse[condition.courseNumber];
   const [openPattern, setOpenPattern] = useState<string | null>(null);
 
-  function togglePattern(patternName: string) {
-    setOpenPattern((current) => (current === patternName ? null : patternName));
+  function togglePattern(patternKey: string) {
+    setOpenPattern((current) => (current === patternKey ? null : patternKey));
   }
 
   return (
@@ -761,37 +1051,49 @@ function DiseaseDetail({
         <h3>Patterns</h3>
         {expandedContent ? (
           <div className="expanded-pattern-list">
-            {expandedContent.patterns.map((pattern, index) => (
-              <article
-                className="expanded-pattern-card"
-                key={pattern.name}
-                data-open={openPattern === pattern.name}
-                style={cardStyle(index)}
-              >
-                <button
-                  className="pattern-card-summary"
-                  onClick={() => togglePattern(pattern.name)}
-                  type="button"
-                >
-                  <span>{displayPatternTitle(pattern.name)}</span>
-                  <ChevronRight size={18} aria-hidden="true" />
-                </button>
-                {openPattern === pattern.name && (
-                  <div className="pattern-card-body">
-                    {displayPatternTitle(pattern.name) !== pattern.name && (
-                      <p className="full-pattern-name">{pattern.name}</p>
-                    )}
-                    <p>
-                      <strong>Principle:</strong> {pattern.principle}
-                    </p>
-                    <PointPrescription principle={pattern.principle} pointsText={pattern.points} />
-                    {pattern.formula && (
-                      <FormulaCard formula={pattern.formula} color={colorForPrinciple(pattern.principle)} />
-                    )}
-                    {pattern.notes && <p>{pattern.notes}</p>}
-                  </div>
-                )}
-              </article>
+            {Array.from(
+              expandedContent.patterns.reduce((groups, pattern) => {
+                const section = pattern.section ?? "";
+                const items = groups.get(section) ?? [];
+                items.push(pattern);
+                groups.set(section, items);
+                return groups;
+              }, new Map<string, typeof expandedContent.patterns>()),
+            ).map(([section, patterns]) => (
+              <section className="pattern-subsection" key={section || "all-patterns"}>
+                {section && <h4>{section}</h4>}
+                {patterns.map((pattern) => {
+                  const index = expandedContent.patterns.indexOf(pattern);
+                  const patternKey = `${section}|${pattern.name}`;
+                  return (
+                    <article
+                      className="expanded-pattern-card"
+                      key={patternKey}
+                      data-open={openPattern === patternKey}
+                      style={cardStyle(index)}
+                    >
+                      <button
+                        className="pattern-card-summary"
+                        onClick={() => togglePattern(patternKey)}
+                        type="button"
+                      >
+                        <span>{displayPatternTitle(pattern.name)}</span>
+                        <ChevronRight size={18} aria-hidden="true" />
+                      </button>
+                      {openPattern === patternKey && (
+                        <div className="pattern-card-body">
+                          <p><strong>Principle:</strong> {pattern.principle}</p>
+                          <PointPrescription principle={pattern.principle} pointsText={pattern.points} />
+                          {pattern.formula && (
+                            <FormulaCard formula={pattern.formula} color={colorForPrinciple(pattern.principle)} />
+                          )}
+                          {pattern.notes && <p>{pattern.notes}</p>}
+                        </div>
+                      )}
+                    </article>
+                  );
+                })}
+              </section>
             ))}
           </div>
         ) : (

@@ -16,6 +16,7 @@ export type FormulaIngredient = {
 
 export type LungPatternDetail = {
   name: string;
+  section?: string;
   principle: string;
   points: string;
   formula?: FormulaDetail;
