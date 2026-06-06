@@ -336,15 +336,13 @@ p {
 
 .content-section,
 .red-flag-section,
-.pattern-section,
-.source-section {
+.pattern-section {
   margin-top: 22px;
 }
 
 .content-section h3,
 .red-flag-section h3,
-.pattern-section h3,
-.source-section h3 {
+.pattern-section h3 {
   margin-bottom: 10px;
   color: #35423c;
   font-size: 0.88rem;
@@ -389,15 +387,23 @@ p {
 }
 
 .strategy-groups {
+  align-items: start;
   display: grid;
   gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
 }
 
 .strategy-group {
   border: 1.5px solid #161616;
   border-radius: 12px;
   box-shadow: 3px 3px 0 #161616;
+  grid-column: 1 / -1;
   overflow: hidden;
+}
+
+.strategy-group.compact {
+  align-self: start;
+  grid-column: span 1;
 }
 
 .strategy-group-head {
@@ -470,6 +476,49 @@ p {
 
 .strategy-point-tile {
   min-height: auto;
+}
+
+.strategy-group.compact .strategy-group-head {
+  font-size: 0.72rem;
+  min-height: 34px;
+  padding: 7px 8px;
+  text-align: center;
+}
+
+.strategy-group.compact .strategy-block {
+  padding: 7px;
+}
+
+.strategy-group.compact .strategy-block > span {
+  display: none;
+}
+
+.strategy-group.compact .strategy-point-grid {
+  grid-template-columns: repeat(auto-fit, 56px);
+  justify-content: center;
+  place-items: stretch;
+}
+
+.strategy-group.compact .strategy-point-tile {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  box-shadow: 1.5px 1.5px 0 #161616;
+  min-height: 56px;
+}
+
+.strategy-group.compact .strategy-point-tile.wide {
+  aspect-ratio: 1;
+  grid-column: auto;
+}
+
+.strategy-group.compact .point-name {
+  font-size: 0.8rem;
+  padding: 2px;
+}
+
+.strategy-group.compact .point-code {
+  font-size: 0.64rem;
+  padding: 2px;
 }
 
 .strategy-pair-tile {
@@ -660,6 +709,86 @@ p {
   margin: 0;
 }
 
+.formula-ingredient-section {
+  display: grid;
+  gap: 7px;
+}
+
+.formula-ingredient-grid {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+}
+
+.formula-ingredient-tile {
+  border: 1.4px solid #161616;
+  border-radius: 10px;
+  box-shadow: 2px 2px 0 #161616;
+  display: grid;
+  grid-template-rows: minmax(40px, 1fr) 24px;
+  min-height: 64px;
+  overflow: hidden;
+}
+
+.formula-ingredient-name {
+  align-content: center;
+  background: var(--ingredient-property-color, var(--formula-color));
+  color: #fff;
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: 5px;
+  text-align: center;
+}
+
+.formula-ingredient-tile.property-hot {
+  --ingredient-property-color: #c5282f;
+}
+
+.formula-ingredient-tile.property-warm {
+  --ingredient-property-color: #e67145;
+}
+
+.formula-ingredient-tile.property-neutral {
+  --ingredient-property-color: #90989a;
+}
+
+.formula-ingredient-tile.property-cool {
+  --ingredient-property-color: #52a8d9;
+}
+
+.formula-ingredient-tile.property-cold {
+  --ingredient-property-color: #2774bd;
+}
+
+.formula-ingredient-name strong {
+  font-size: 0.92rem;
+  font-weight: 900;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.formula-ingredient-name small {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.62rem;
+  font-weight: 800;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.formula-ingredient-dose {
+  align-items: center;
+  background: #fffaf2;
+  color: #171d1a;
+  display: flex;
+  font-size: 0.7rem;
+  font-weight: 900;
+  justify-content: center;
+  line-height: 1.1;
+  padding: 4px;
+  text-align: center;
+}
+
 .point-prescription > strong {
   color: #26312d;
   font-size: 0.9rem;
@@ -678,7 +807,7 @@ p {
 
 .point-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 72px);
+  grid-template-columns: repeat(auto-fill, 56px);
   gap: 6px;
   justify-content: start;
 }
@@ -693,8 +822,8 @@ p {
 }
 
 .point-tile.wide {
-  aspect-ratio: 2 / 1;
-  grid-column: span 2;
+  aspect-ratio: 1;
+  grid-column: auto;
 }
 
 .point-name,
@@ -702,22 +831,26 @@ p {
   display: grid;
   place-items: center;
   min-width: 0;
-  padding: 4px;
+  padding: 3px;
   text-align: center;
 }
 
 .point-name {
   background: var(--point-color);
   color: #fff;
-  font-size: 1.08rem;
+  font-size: 0.86rem;
   font-weight: 900;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
 }
 
 .point-code {
   background: #fffaf2;
   color: #171d1a;
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   font-weight: 900;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
 }
 
 .point-tile.neutral .point-name {
@@ -737,57 +870,6 @@ p {
   overflow-wrap: anywhere;
   font-size: 0.88rem;
   line-height: 1.3;
-}
-
-.source-section p {
-  margin-bottom: 0;
-  color: #56645e;
-  overflow-wrap: anywhere;
-  font-size: 0.9rem;
-  line-height: 1.45;
-}
-
-.formula-resource-block {
-  margin-top: 14px;
-}
-
-.formula-resource-block h4 {
-  color: #35423c;
-  font-size: 0.78rem;
-  font-weight: 900;
-  margin: 0 0 8px;
-}
-
-.formula-resource-list {
-  display: grid;
-  gap: 7px;
-}
-
-.formula-resource-card {
-  background: rgba(255, 255, 255, 0.72);
-  border-radius: 8px;
-  box-shadow: 0 8px 18px rgba(50, 55, 52, 0.06);
-  display: grid;
-  gap: 2px;
-  padding: 9px 10px;
-}
-
-.formula-resource-card strong {
-  color: #26312d;
-  font-size: 0.9rem;
-  font-weight: 900;
-}
-
-.formula-resource-card span {
-  color: #56645e;
-  font-size: 0.78rem;
-  font-weight: 800;
-}
-
-.formula-resource-card small {
-  color: #68756f;
-  font-size: 0.76rem;
-  line-height: 1.35;
 }
 
 .empty-state,

@@ -2,8 +2,8 @@ import { ArrowLeft, BookOpen, ChevronRight, Search } from "lucide-react";
 import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 import acuData from "../data/acu3-course-organ-system-chart.json";
-import formulaResourceData from "../data/formula-resources.json";
 import { heartContent } from "./heartContent";
+import { liverContent } from "./liverContent";
 import { lungContent, type FormulaDetail } from "./lungContent";
 import { spleenContent } from "./spleenContent";
 import { extractPoints, getPointMeta, type PointAction } from "./pointMeta";
@@ -29,20 +29,12 @@ type SystemGroup = {
   items: AcuCondition[];
 };
 
-type FormulaResource = {
-  id: string;
-  title: string;
-  englishTitle: string;
-  fileName: string;
-  sourceRole: string;
-};
-
 const dataset = acuData as AcuDataset;
-const formulaResources = formulaResourceData.resources as FormulaResource[];
 const expandedContentByCourse = {
   ...lungContent,
   ...heartContent,
   ...spleenContent,
+  ...liverContent,
 };
 const categoryOrder = [
   "Lung System Disorders",
@@ -152,6 +144,212 @@ function styleForAction(action: PointAction) {
 
 function colorForPrinciple(principle: string) {
   return principleStyles.find((style) => style.match.test(principle))?.color ?? "#26312d";
+}
+
+type HerbProperty = "hot" | "warm" | "neutral" | "cool" | "cold";
+
+const herbProperties: Record<string, HerbProperty> = {
+  荆芥: "warm",
+  防风: "warm",
+  羌活: "warm",
+  独活: "warm",
+  柴胡: "cool",
+  川芎: "warm",
+  前胡: "cool",
+  桔梗: "neutral",
+  枳壳: "cool",
+  茯苓: "neutral",
+  甘草: "neutral",
+  金银花: "cold",
+  连翘: "cool",
+  牛蒡子: "cold",
+  薄荷: "cool",
+  淡豆豉: "cool",
+  淡竹叶: "cold",
+  芦根: "cold",
+  藿香: "warm",
+  厚朴: "warm",
+  陈皮: "warm",
+  紫苏叶: "warm",
+  白芷: "warm",
+  半夏曲: "warm",
+  大腹皮: "warm",
+  白术: "warm",
+  生姜: "warm",
+  大枣: "warm",
+  炙甘草: "warm",
+  人参: "warm",
+  葛根: "cool",
+  半夏: "warm",
+  木香: "warm",
+  玉竹: "cool",
+  葱白: "warm",
+  白薇: "cold",
+  桃仁: "neutral",
+  红花: "warm",
+  当归: "warm",
+  当归尾: "warm",
+  生地黄: "cold",
+  熟地黄: "warm",
+  赤芍: "cool",
+  牛膝: "neutral",
+  怀牛膝: "neutral",
+  川牛膝: "neutral",
+  生甘草: "neutral",
+  生甘草梢: "neutral",
+  瓜蒌实: "cold",
+  薤白: "warm",
+  白酒: "warm",
+  枳实: "cool",
+  桂枝: "warm",
+  丹参: "cool",
+  玄参: "cold",
+  茯神: "neutral",
+  五味子: "warm",
+  远志: "warm",
+  天冬: "cold",
+  麦冬: "cool",
+  柏子仁: "neutral",
+  酸枣仁: "neutral",
+  朱砂: "cold",
+  黄芪: "warm",
+  龙眼肉: "warm",
+  石菖蒲: "warm",
+  龙齿: "neutral",
+  黄连: "cold",
+  黄芩: "cold",
+  芍药: "cool",
+  白芍: "cool",
+  阿胶: "neutral",
+  鸡子黄: "neutral",
+  竹茹: "cool",
+  龙胆草: "cold",
+  栀子: "cold",
+  泽泻: "cold",
+  木通: "cold",
+  车前子: "cold",
+  竹叶: "cold",
+  苏叶: "warm",
+  香附: "neutral",
+  牡丹皮: "cool",
+  小麦: "cool",
+  天麻: "neutral",
+  川贝母: "cool",
+  胆南星: "cool",
+  全蝎: "neutral",
+  僵蚕: "neutral",
+  琥珀: "neutral",
+  山药: "neutral",
+  山茱萸: "warm",
+  枸杞子: "neutral",
+  鹿角胶: "warm",
+  菟丝子: "warm",
+  龟甲胶: "cool",
+  苏合香: "warm",
+  安息香: "neutral",
+  冰片: "cool",
+  麝香: "warm",
+  沉香: "warm",
+  丁香: "warm",
+  诃子: "neutral",
+  荜茇: "hot",
+  乳香: "warm",
+  石膏: "cold",
+  寒水石: "cold",
+  滑石: "cold",
+  磁石: "cold",
+  羚羊角: "cold",
+  升麻: "cool",
+  朴硝: "cold",
+  硝石: "cold",
+  黄金: "neutral",
+  附子: "hot",
+  干姜: "hot",
+  礞石: "neutral",
+  大黄: "cold",
+  南星: "warm",
+  橘红: "warm",
+  赤茯苓: "neutral",
+  代赭石: "cold",
+  龙骨: "neutral",
+  牡蛎: "cool",
+  龟板: "cool",
+  川楝子: "cold",
+  生麦芽: "neutral",
+  茵陈: "cool",
+  地龙: "cold",
+  白扁豆: "warm",
+  白头翁: "cold",
+  北沙参: "cool",
+  补骨脂: "warm",
+  苍术: "warm",
+  草豆蔻: "warm",
+  当归身: "warm",
+  高良姜: "hot",
+  荷叶蒂: "neutral",
+  黄柏: "cold",
+  火麻仁: "neutral",
+  粳米: "neutral",
+  莱菔子: "neutral",
+  莲子: "neutral",
+  芒硝: "cold",
+  蒲黄: "neutral",
+  秦皮: "cold",
+  肉苁蓉: "warm",
+  肉豆蔻: "warm",
+  肉桂: "hot",
+  桑叶: "cold",
+  沙参: "cool",
+  砂仁: "warm",
+  山楂: "warm",
+  神曲: "warm",
+  生扁豆: "cool",
+  柿蒂: "neutral",
+  天花粉: "cool",
+  吴茱萸: "hot",
+  五灵脂: "warm",
+  杏仁: "warm",
+  旋覆花: "warm",
+  饴糖: "warm",
+  薏苡仁: "cool",
+  罂粟壳: "neutral",
+  郁金: "cold",
+  白豆蔻: "warm",
+  贝母: "cool",
+  常山: "cold",
+  穿山甲: "cool",
+  杜仲: "warm",
+  藁本: "warm",
+  钩藤: "cool",
+  瓜蒌根: "cold",
+  海带: "cold",
+  海藻: "cold",
+  何首乌: "warm",
+  红枣: "warm",
+  菊花: "cool",
+  昆布: "cold",
+  老葱: "warm",
+  蔓荆子: "cool",
+  青蒿: "cold",
+  青皮: "warm",
+  桑寄生: "neutral",
+  射干: "cold",
+  石决明: "cold",
+  煨生姜: "warm",
+  犀角: "cold",
+  细辛: "warm",
+  鲜姜: "warm",
+  夜交藤: "neutral",
+  益母草: "cool",
+  知母: "cold",
+};
+
+function propertyForIngredient(chineseName: string): HerbProperty {
+  return herbProperties[chineseName] ?? "neutral";
+}
+
+function propertyLabel(property: HerbProperty) {
+  return property[0].toUpperCase() + property.slice(1);
 }
 
 function pointPairStyle(firstPoint: string, secondPoint: string): CSSProperties {
@@ -627,28 +825,6 @@ function DiseaseDetail({
         )}
       </section>
 
-      <section className="source-section">
-        <h3>Source Lecture</h3>
-        <p>{condition.sourceFile}</p>
-        <FormulaResources />
-      </section>
-    </div>
-  );
-}
-
-function FormulaResources() {
-  return (
-    <div className="formula-resource-block">
-      <h4>Formula Resources</h4>
-      <div className="formula-resource-list">
-        {formulaResources.map((resource) => (
-          <article className="formula-resource-card" key={resource.id}>
-            <strong>{resource.title}</strong>
-            <span>{resource.englishTitle}</span>
-            <small>{resource.sourceRole}</small>
-          </article>
-        ))}
-      </div>
     </div>
   );
 }
@@ -661,56 +837,63 @@ function CommonStrategy({ content }: { content: (typeof expandedContentByCourse)
     <section className="common-strategy-section">
       <h3>Common Strategy</h3>
       <div className="strategy-groups">
-        {groups.map((group) => (
-          <article
-            className={`strategy-group ${group.color ? "" : "neutral"}`}
-            key={group.label}
-            style={{ "--strategy-color": group.color ?? "#ece7de" } as CSSProperties}
-          >
-            <div className="strategy-group-head">{group.label}</div>
-            {group.points.length > 0 && (
-              <div className="strategy-block">
-                <span>Common points</span>
-                <div className="strategy-point-grid">
-                  {group.points.map((point) => {
-                    const meta = getPointMeta(point.code);
-                    return (
+        {groups.map((group) => {
+          const isCompact = group.points.length <= 2 && group.pairs.length === 0;
+          const label = isCompact
+            ? group.label.replace("Resolve Phlegm/Damp", "Resolve Damp")
+            : group.label;
+
+          return (
+            <article
+              className={`strategy-group ${group.color ? "" : "neutral"} ${isCompact ? "compact" : ""}`}
+              key={group.label}
+              style={{ "--strategy-color": group.color ?? "#ece7de" } as CSSProperties}
+            >
+              <div className="strategy-group-head">{label}</div>
+              {group.points.length > 0 && (
+                <div className="strategy-block">
+                  <span>Common points</span>
+                  <div className="strategy-point-grid">
+                    {group.points.map((point) => {
+                      const meta = getPointMeta(point.code);
+                      return (
+                        <span
+                          className={pointTileClass(
+                            point.code,
+                            `strategy-point-tile ${group.color ? "" : "neutral"}`,
+                          )}
+                          key={`${group.label}-${point.code}`}
+                          style={{ "--point-color": group.color ?? "#ece7de" } as CSSProperties}
+                        >
+                          <span className="point-name">{meta.chineseName}</span>
+                          <span className="point-code">{meta.code}</span>
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+              {group.pairs.length > 0 && (
+                <div className="strategy-block">
+                  <span>Common pairings</span>
+                  <div className="strategy-pair-list">
+                    {group.pairs.map((pair) => (
                       <span
-                        className={pointTileClass(
-                          point.code,
-                          `strategy-point-tile ${group.color ? "" : "neutral"}`,
-                        )}
-                        key={`${group.label}-${point.code}`}
-                        style={{ "--point-color": group.color ?? "#ece7de" } as CSSProperties}
+                        className={`strategy-pair-tile ${group.color ? "" : "neutral"}`}
+                        key={`${group.label}-${pair.points.join("-")}`}
+                        style={pointPairStyle(pair.points[0], pair.points[1])}
                       >
-                        <span className="point-name">{meta.chineseName}</span>
-                        <span className="point-code">{meta.code}</span>
+                        <span>{getPointMeta(pair.points[0]).code}</span>
+                        <b aria-hidden="true">+</b>
+                        <span>{getPointMeta(pair.points[1]).code}</span>
                       </span>
-                    );
-                  })}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
-            {group.pairs.length > 0 && (
-              <div className="strategy-block">
-                <span>Common pairings</span>
-                <div className="strategy-pair-list">
-                  {group.pairs.map((pair) => (
-                    <span
-                      className={`strategy-pair-tile ${group.color ? "" : "neutral"}`}
-                      key={`${group.label}-${pair.points.join("-")}`}
-                      style={pointPairStyle(pair.points[0], pair.points[1])}
-                    >
-                      <span>{getPointMeta(pair.points[0]).code}</span>
-                      <b aria-hidden="true">+</b>
-                      <span>{getPointMeta(pair.points[1]).code}</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </article>
-        ))}
+              )}
+            </article>
+          );
+        })}
       </div>
     </section>
   );
@@ -731,6 +914,30 @@ function FormulaCard({
         {formula.englishName && <small>{formula.englishName}</small>}
       </div>
       <div className="formula-card-body">
+        {formula.ingredients && (
+          <div className="formula-ingredient-section">
+            <span>Ingredients</span>
+            <div className="formula-ingredient-grid">
+              {formula.ingredients.map((ingredient) => {
+                const property = propertyForIngredient(ingredient.chineseName);
+
+                return (
+                  <article
+                    className={`formula-ingredient-tile property-${property}`}
+                    key={`${formula.pinyin}-${ingredient.pinyin}`}
+                    title={`${ingredient.chineseName} ${ingredient.pinyin}: ${propertyLabel(property)}`}
+                  >
+                    <div className="formula-ingredient-name">
+                      <strong>{ingredient.chineseName}</strong>
+                      <small>{ingredient.pinyin}</small>
+                    </div>
+                    <div className="formula-ingredient-dose">{ingredient.dose}</div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        )}
         <div>
           <span>Actions</span>
           <p>{formula.actions.join("; ")}</p>
