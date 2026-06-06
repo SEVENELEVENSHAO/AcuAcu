@@ -4,6 +4,14 @@ export type FormulaDetail = {
   englishName?: string;
   actions: string[];
   indications: string;
+  ingredients?: FormulaIngredient[];
+};
+
+export type FormulaIngredient = {
+  chineseName: string;
+  pinyin: string;
+  englishName: string;
+  dose: string;
 };
 
 export type LungPatternDetail = {
@@ -28,6 +36,19 @@ const formulas = {
     englishName: "Schizonepeta and Siler Formula to Overcome Pathogenic Influences",
     actions: ["Releases exterior Wind-Cold", "Resolves toxicity", "Stops cough and body ache"],
     indications: "Wind-Cold exterior pattern with chills, fever, headache, body aches, nasal obstruction, and cough.",
+    ingredients: [
+      { chineseName: "荆芥", pinyin: "Jing Jie", englishName: "Schizonepeta", dose: "4.5 g" },
+      { chineseName: "防风", pinyin: "Fang Feng", englishName: "Siler Root", dose: "4.5 g" },
+      { chineseName: "羌活", pinyin: "Qiang Huo", englishName: "Notopterygium", dose: "4.5 g" },
+      { chineseName: "独活", pinyin: "Du Huo", englishName: "Pubescent Angelica Root", dose: "4.5 g" },
+      { chineseName: "柴胡", pinyin: "Chai Hu", englishName: "Bupleurum", dose: "4.5 g" },
+      { chineseName: "川芎", pinyin: "Chuan Xiong", englishName: "Sichuan Lovage", dose: "4.5 g" },
+      { chineseName: "前胡", pinyin: "Qian Hu", englishName: "Peucedanum", dose: "4.5 g" },
+      { chineseName: "桔梗", pinyin: "Jie Geng", englishName: "Platycodon", dose: "4.5 g" },
+      { chineseName: "枳壳", pinyin: "Zhi Ke", englishName: "Bitter Orange", dose: "4.5 g" },
+      { chineseName: "茯苓", pinyin: "Fu Ling", englishName: "Poria", dose: "4.5 g" },
+      { chineseName: "甘草", pinyin: "Gan Cao", englishName: "Licorice Root", dose: "1.5 g" },
+    ],
   },
   yinQiaoSan: {
     chineseName: "银翘散",
@@ -35,6 +56,18 @@ const formulas = {
     englishName: "Honeysuckle and Forsythia Powder",
     actions: ["Releases Wind-Heat", "Clears Heat toxin", "Benefits throat"],
     indications: "Early Wind-Heat with fever, slight chills, sore throat, thirst, cough, and floating rapid pulse.",
+    ingredients: [
+      { chineseName: "金银花", pinyin: "Jin Yin Hua", englishName: "Honeysuckle Flower", dose: "30 g" },
+      { chineseName: "连翘", pinyin: "Lian Qiao", englishName: "Forsythia Fruit", dose: "30 g" },
+      { chineseName: "桔梗", pinyin: "Jie Geng", englishName: "Platycodon", dose: "18 g" },
+      { chineseName: "牛蒡子", pinyin: "Niu Bang Zi", englishName: "Arctium Fruit", dose: "18 g" },
+      { chineseName: "薄荷", pinyin: "Bo He", englishName: "Mint", dose: "18 g" },
+      { chineseName: "淡豆豉", pinyin: "Dan Dou Chi", englishName: "Prepared Soybean", dose: "15 g" },
+      { chineseName: "淡竹叶", pinyin: "Dan Zhu Ye", englishName: "Lophatherum", dose: "12 g" },
+      { chineseName: "荆芥", pinyin: "Jing Jie", englishName: "Schizonepeta", dose: "12 g" },
+      { chineseName: "芦根", pinyin: "Lu Gen", englishName: "Reed Rhizome", dose: "18 g" },
+      { chineseName: "甘草", pinyin: "Gan Cao", englishName: "Licorice Root", dose: "15 g" },
+    ],
   },
   huoXiangZhengQiSan: {
     chineseName: "藿香正气散",
@@ -42,6 +75,21 @@ const formulas = {
     englishName: "Agastache Powder to Rectify the Qi",
     actions: ["Transforms Dampness", "Releases exterior", "Harmonizes middle burner"],
     indications: "Summer-Heat Damp or exterior Damp with nausea, chest/epigastric oppression, abdominal discomfort, loose stool, and greasy coat.",
+    ingredients: [
+      { chineseName: "藿香", pinyin: "Huo Xiang", englishName: "Agastache", dose: "90 g" },
+      { chineseName: "厚朴", pinyin: "Hou Po", englishName: "Magnolia Bark", dose: "60 g" },
+      { chineseName: "陈皮", pinyin: "Chen Pi", englishName: "Tangerine Peel", dose: "60 g" },
+      { chineseName: "紫苏叶", pinyin: "Zi Su Ye", englishName: "Perilla Leaf", dose: "30 g" },
+      { chineseName: "白芷", pinyin: "Bai Zhi", englishName: "Angelica Dahurica", dose: "30 g" },
+      { chineseName: "半夏曲", pinyin: "Ban Xia Qu", englishName: "Medicated Pinellia", dose: "60 g" },
+      { chineseName: "大腹皮", pinyin: "Da Fu Pi", englishName: "Areca Peel", dose: "30 g" },
+      { chineseName: "白术", pinyin: "Bai Zhu", englishName: "Atractylodes", dose: "60 g" },
+      { chineseName: "茯苓", pinyin: "Fu Ling", englishName: "Poria", dose: "30 g" },
+      { chineseName: "桔梗", pinyin: "Jie Geng", englishName: "Platycodon", dose: "60 g" },
+      { chineseName: "生姜", pinyin: "Sheng Jiang", englishName: "Fresh Ginger", dose: "3片" },
+      { chineseName: "大枣", pinyin: "Da Zao", englishName: "Jujube", dose: "1枚" },
+      { chineseName: "炙甘草", pinyin: "Zhi Gan Cao", englishName: "Honey-fried Licorice", dose: "75 g" },
+    ],
   },
   shenSuYin: {
     chineseName: "参苏饮",
@@ -49,6 +97,21 @@ const formulas = {
     englishName: "Ginseng and Perilla Decoction",
     actions: ["Boosts Qi", "Releases exterior", "Transforms Phlegm"],
     indications: "Exterior Wind-Cold with underlying Qi deficiency, fatigue, cough with sputum, and weak constitution.",
+    ingredients: [
+      { chineseName: "人参", pinyin: "Ren Shen", englishName: "Ginseng", dose: "9 g" },
+      { chineseName: "紫苏叶", pinyin: "Zi Su Ye", englishName: "Perilla Leaf", dose: "9 g" },
+      { chineseName: "陈皮", pinyin: "Chen Pi", englishName: "Tangerine Peel", dose: "6 g" },
+      { chineseName: "甘草", pinyin: "Gan Cao", englishName: "Licorice Root", dose: "6 g" },
+      { chineseName: "葛根", pinyin: "Ge Gen", englishName: "Kudzu Root", dose: "9 g" },
+      { chineseName: "前胡", pinyin: "Qian Hu", englishName: "Peucedanum", dose: "9 g" },
+      { chineseName: "半夏", pinyin: "Ban Xia", englishName: "Pinellia", dose: "9 g" },
+      { chineseName: "茯苓", pinyin: "Fu Ling", englishName: "Poria", dose: "9 g" },
+      { chineseName: "枳壳", pinyin: "Zhi Ke", englishName: "Bitter Orange", dose: "6 g" },
+      { chineseName: "桔梗", pinyin: "Jie Geng", englishName: "Platycodon", dose: "6 g" },
+      { chineseName: "木香", pinyin: "Mu Xiang", englishName: "Aucklandia", dose: "6 g" },
+      { chineseName: "生姜", pinyin: "Sheng Jiang", englishName: "Fresh Ginger", dose: "7片" },
+      { chineseName: "大枣", pinyin: "Da Zao", englishName: "Jujube", dose: "1枚" },
+    ],
   },
   jiaJianWeiRuiTang: {
     chineseName: "加减葳蕤汤",
@@ -56,6 +119,16 @@ const formulas = {
     englishName: "Modified Solomon's Seal Decoction",
     actions: ["Nourishes Yin", "Releases exterior", "Clears mild Heat"],
     indications: "Exterior invasion with underlying Yin deficiency, dry throat, thirst, slight fever, and dry cough.",
+    ingredients: [
+      { chineseName: "玉竹", pinyin: "Yu Zhu", englishName: "Solomon's Seal", dose: "9 g" },
+      { chineseName: "葱白", pinyin: "Cong Bai", englishName: "Scallion Bulb", dose: "6 g" },
+      { chineseName: "桔梗", pinyin: "Jie Geng", englishName: "Platycodon", dose: "4.5 g" },
+      { chineseName: "淡豆豉", pinyin: "Dan Dou Chi", englishName: "Prepared Soybean", dose: "12 g" },
+      { chineseName: "薄荷", pinyin: "Bo He", englishName: "Mint", dose: "4.5 g" },
+      { chineseName: "白薇", pinyin: "Bai Wei", englishName: "Cynanchum Root", dose: "3 g" },
+      { chineseName: "炙甘草", pinyin: "Zhi Gan Cao", englishName: "Honey-fried Licorice", dose: "1.5 g" },
+      { chineseName: "大枣", pinyin: "Da Zao", englishName: "Jujube", dose: "2枚" },
+    ],
   },
   xingSuSan: {
     chineseName: "杏苏散",
