@@ -5,18 +5,33 @@ import {
   Search,
 } from "lucide-react";
 import type { CSSProperties } from "react";
-import { useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import acuData from "../data/acu3-course-organ-system-chart.json";
 import { channelContent } from "./channelContent";
+import { translateClinicalList, translateClinicalText } from "./clinicalTranslations";
 import { auditConditionContent } from "./clinicalAudit";
 import { gyneContent } from "./gyneContent";
 import { heartContent } from "./heartContent";
 import { kidneyContent } from "./kidneyContent";
+import {
+  conditionNames,
+  localizedCondition,
+  localizedSystem,
+  type Language,
+  uiText,
+} from "./i18n";
 import { liverContent } from "./liverContent";
 import { lungContent, type FormulaDetail } from "./lungContent";
 import { qiBloodContent } from "./qiBloodContent";
 import { spleenContent } from "./spleenContent";
 import { extractPoints, getPointMeta, type PointAction } from "./pointMeta";
+
+const LanguageContext = createContext<Language>("en");
+
+function useLanguageText() {
+  const language = useContext(LanguageContext);
+  return { language, text: uiText[language] };
+}
 
 type AcuCondition = {
   courseNumber: number;
@@ -631,6 +646,7 @@ function matchesSearch(condition: AcuCondition, query: string) {
     condition.pinyin,
     condition.sourceFile,
     condition.subPatterns.join(" "),
+    conditionNames[condition.courseNumber] ?? "",
     expandedSearchText(condition),
   ]
     .join(" ")
@@ -720,6 +736,7 @@ function collectBigPatterns() {
 }
 
 export function App() {
+  const [language, setLanguage] = useState<Language>("en");
   const [query, setQuery] = useState("");
   const [activeSystem, setActiveSystem] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -746,6 +763,13 @@ export function App() {
     : activeGroup || isBigPatterns
       ? "diseases"
       : "systems";
+  const text = uiText[language];
+  const canGoBack = Boolean(query || selectedCondition || activeBigPattern || activeGroup || isBigPatterns);
+
+  useEffect(() => {
+    document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+    document.title = language === "zh" ? "针灸三参考" : "Acu 3 Reference";
+  }, [language]);
 
   function chooseSystem(systemName: string) {
     setActiveSystem(systemName);
@@ -760,19 +784,54 @@ export function App() {
     setSelectedBigPattern(null);
   }
 
+  function goBack() {
+    if (selectedCondition) {
+      setSelectedId(null);
+      return;
+    }
+    if (activeBigPattern) {
+      setSelectedBigPattern(null);
+      return;
+    }
+    if (activeGroup || isBigPatterns) {
+      setActiveSystem(null);
+      return;
+    }
+    if (query) setQuery("");
+  }
+
   return (
-    <main className="app-shell">
-      <section className="workspace">
+    <LanguageContext.Provider value={language}>
+      <main className="app-shell">
+        <section className="workspace">
         <header className="app-header">
           <button className="logo-button" onClick={clearQuery} type="button">
             AcuAcu
           </button>
+          <button
+            aria-label={language === "en" ? "Switch to Chinese" : "切换到英文"}
+            className="language-button"
+            onClick={() => setLanguage((current) => current === "en" ? "zh" : "en")}
+            type="button"
+          >
+            {language === "en" ? "中文" : "EN"}
+          </button>
         </header>
 
         <div className="search-wrap">
+          {canGoBack && (
+            <button
+              aria-label={text.back}
+              className="search-back-button"
+              onClick={goBack}
+              type="button"
+            >
+              <ArrowLeft size={19} aria-hidden="true" />
+            </button>
+          )}
           <Search aria-hidden="true" size={18} />
           <input
-            aria-label="Search conditions and patterns"
+            aria-label={text.searchLabel}
             value={query}
               onChange={(event) => {
                 setQuery(event.target.value);
@@ -780,19 +839,19 @@ export function App() {
                 setSelectedId(null);
                 setSelectedBigPattern(null);
             }}
-            placeholder="Search disease, pinyin, pattern..."
+            placeholder={text.searchPlaceholder}
           />
           {query && (
             <button className="text-button" onClick={clearQuery} type="button">
-              Clear
+              {text.clear}
             </button>
           )}
         </div>
 
         <div className={`content-grid is-${mobilePanel}`}>
-          <nav className="systems-panel" aria-label="Organ systems">
+          <nav className="systems-panel" aria-label={text.systems}>
             {groups.length === 0 ? (
-              <div className="empty-state">No matching condition or pattern.</div>
+              <div className="empty-state">{text.noMatches}</div>
             ) : (
               <div className="system-list">
                 {groups.map((group) => (
@@ -806,8 +865,8 @@ export function App() {
                       {categoryIcons[group.name] ?? "📚"}
                     </span>
                     <span>
-                      <strong>{group.name}</strong>
-                      <small>{group.items.length} conditions</small>
+                      <strong>{localizedSystem(group.name, language)}</strong>
+                      <small>{group.items.length} {text.conditions}</small>
                     </span>
                     <ChevronRight size={18} aria-hidden="true" />
                   </button>
@@ -820,8 +879,8 @@ export function App() {
                   >
                     <span className="system-icon" aria-hidden="true">🧩</span>
                     <span>
-                      <strong>Big Patterns</strong>
-                      <small>{bigPatterns.length} shared patterns</small>
+                      <strong>{text.bigPatterns}</strong>
+                      <small>{bigPatterns.length} {text.sharedPatterns}</small>
                     </span>
                     <ChevronRight size={18} aria-hidden="true" />
                   </button>
@@ -830,14 +889,20 @@ export function App() {
             )}
           </nav>
 
-          <section className="diseases-panel" aria-label="Diseases">
+          <section className="diseases-panel" aria-label={text.conditionList}>
             <button className="back-button" onClick={() => setActiveSystem(null)} type="button">
               <ArrowLeft size={18} aria-hidden="true" />
-              Systems
+              {text.systems}
             </button>
             <div className="panel-title">
               <BookOpen size={18} aria-hidden="true" />
-              <h2>{isBigPatterns ? bigPatternsSystem : activeGroup?.name ?? "Choose a system"}</h2>
+              <h2>
+                {isBigPatterns
+                  ? text.bigPatterns
+                  : activeGroup
+                    ? localizedSystem(activeGroup.name, language)
+                    : text.chooseSystem}
+              </h2>
             </div>
 
             {isBigPatterns ? (
@@ -854,15 +919,15 @@ export function App() {
                   >
                     <span className="big-pattern-count">{pattern.diseaseCount}</span>
                     <span>
-                      <strong>{pattern.name}</strong>
-                      <small>Shared across {pattern.diseaseCount} diseases</small>
+                      <strong>{translateClinicalText(pattern.name, language)}</strong>
+                      <small>{text.sharedAcross} {pattern.diseaseCount} {text.diseases}</small>
                     </span>
                     <ChevronRight className="disease-arrow" size={18} aria-hidden="true" />
                   </button>
                 ))}
               </div>
             ) : !activeGroup ? (
-              <div className="empty-state">Choose an organ system to view its conditions.</div>
+              <div className="empty-state">{text.chooseSystemPrompt}</div>
             ) : (
               <div className="disease-list">
                 {activeGroup.items.map((condition, index) => (
@@ -877,11 +942,11 @@ export function App() {
                   >
                     <span className="course-number">{condition.courseNumber}</span>
                     <span>
-                      <strong>{condition.diseaseName}</strong>
+                      <strong>{localizedCondition(condition, language)}</strong>
                       <small>{condition.pinyin}</small>
                       <em>
                         {expandedContentByCourse[condition.courseNumber]?.patterns.length ??
-                          condition.subPatterns.length} patterns
+                          condition.subPatterns.length} {text.patternCount}
                       </em>
                     </span>
                     <ChevronRight className="disease-arrow" size={18} aria-hidden="true" />
@@ -891,7 +956,7 @@ export function App() {
             )}
           </section>
 
-          <article className="detail-panel" aria-label="Disease details">
+          <article className="detail-panel" aria-label={text.conditionList}>
             {activeBigPattern ? (
               <BigPatternDetail
                 key={activeBigPattern.key}
@@ -906,18 +971,19 @@ export function App() {
             ) : (
               <div className="detail-placeholder">
                 <BookOpen size={28} aria-hidden="true" />
-                <h2>{isBigPatterns ? "Choose a big pattern" : "Choose a condition"}</h2>
+                <h2>{isBigPatterns ? text.chooseBigPattern : text.chooseCondition}</h2>
                 <p>
                   {isBigPatterns
-                    ? "Select a shared pattern to compare how it appears across diseases."
-                    : "Open any organ system, then select a disease to review its Acu 3 sub-patterns."}
+                    ? text.bigPatternPrompt
+                    : text.conditionPrompt}
                 </p>
               </div>
             )}
           </article>
         </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </LanguageContext.Provider>
   );
 }
 
@@ -929,23 +995,24 @@ function BigPatternDetail({
   onBack: () => void;
 }) {
   const [openComparison, setOpenComparison] = useState<string | null>(null);
+  const { language, text } = useLanguageText();
 
   return (
     <div className="detail-card big-pattern-detail">
       <button className="back-button detail-back" onClick={onBack} type="button">
         <ArrowLeft size={18} aria-hidden="true" />
-        Big Patterns
+        {text.bigPatterns}
       </button>
 
       <div className="detail-kicker">
-        <span>Shared Pattern</span>
-        <span>{bigPattern.diseaseCount} diseases</span>
+        <span>{text.sharedPattern}</span>
+        <span>{bigPattern.diseaseCount} {text.diseases}</span>
       </div>
-      <h2>{bigPattern.name}</h2>
-      <p className="pinyin">Cross-disease comparison</p>
+      <h2>{translateClinicalText(bigPattern.name, language)}</h2>
+      <p className="pinyin">{text.crossDisease}</p>
 
       <section className="pattern-section">
-        <h3>Appears In</h3>
+        <h3>{text.appearsIn}</h3>
         <div className="big-pattern-comparisons">
           {bigPattern.occurrences.map(({ condition, pattern }, index) => {
             const comparisonKey = `${condition.courseNumber}-${pattern.section ?? ""}-${pattern.name}`;
@@ -966,22 +1033,31 @@ function BigPatternDetail({
                 >
                   <span className="comparison-course">#{condition.courseNumber}</span>
                   <span className="comparison-condition">
-                    <strong>{condition.diseaseName}</strong>
-                    <small>{condition.organSystem}</small>
+                    <strong>{localizedCondition(condition, language)}</strong>
+                    <small>{localizedSystem(condition.organSystem, language)}</small>
                   </span>
                   <ChevronRight size={18} aria-hidden="true" />
                 </button>
 
                 {isOpen && (
                   <div className="big-pattern-comparison-body">
-                    {pattern.section && <div className="comparison-section">{pattern.section}</div>}
-                    {displayPatternTitle(pattern.name) !== bigPattern.name && (
-                      <div className="comparison-specific-pattern">
-                        <span>Pattern</span>
-                        <strong>{displayPatternTitle(pattern.name)}</strong>
+                    {pattern.section && (
+                      <div className="comparison-section">
+                        {translateClinicalText(pattern.section, language)}
                       </div>
                     )}
-                    <p><strong>Principle:</strong> {pattern.principle}</p>
+                    {displayPatternTitle(pattern.name) !== bigPattern.name && (
+                      <div className="comparison-specific-pattern">
+                        <span>{text.pattern}</span>
+                        <strong>
+                          {translateClinicalText(displayPatternTitle(pattern.name), language)}
+                        </strong>
+                      </div>
+                    )}
+                    <p>
+                      <strong>{text.principle}</strong>{" "}
+                      {translateClinicalText(pattern.principle, language)}
+                    </p>
                     <PointPrescription
                       additions={pattern.pointAdditions}
                       principle={pattern.principle}
@@ -1016,6 +1092,7 @@ function DiseaseDetail({
 }) {
   const expandedContent = expandedContentByCourse[condition.courseNumber];
   const [openPattern, setOpenPattern] = useState<string | null>(null);
+  const { language, text } = useLanguageText();
 
   function togglePattern(patternKey: string) {
     setOpenPattern((current) => (current === patternKey ? null : patternKey));
@@ -1025,23 +1102,23 @@ function DiseaseDetail({
     <div className="detail-card">
       <button className="back-button detail-back" onClick={onBack} type="button">
         <ArrowLeft size={18} aria-hidden="true" />
-        Conditions
+        {text.conditionList}
       </button>
 
       <div className="detail-kicker">
         <span>#{condition.courseNumber}</span>
-        <span>{condition.organSystem}</span>
+        <span>{localizedSystem(condition.organSystem, language)}</span>
       </div>
-      <h2>{condition.diseaseName}</h2>
+      <h2>{localizedCondition(condition, language)}</h2>
       <p className="pinyin">{condition.pinyin}</p>
 
       {expandedContent && <CommonStrategy content={expandedContent} />}
 
       {expandedContent?.redFlags && (
         <section className="red-flag-section">
-          <h3>Red Flags</h3>
+          <h3>{text.redFlags}</h3>
           <ul>
-            {expandedContent.redFlags.map((flag) => (
+            {translateClinicalList(expandedContent.redFlags, language).map((flag) => (
               <li key={flag}>{flag}</li>
             ))}
           </ul>
@@ -1050,9 +1127,9 @@ function DiseaseDetail({
 
       {expandedContent?.tcmNotes && (
         <section className="content-section">
-          <h3>Clinical Notes</h3>
+          <h3>{text.clinicalNotes}</h3>
           <ul>
-            {expandedContent.tcmNotes.map((note) => (
+            {translateClinicalList(expandedContent.tcmNotes, language).map((note) => (
               <li key={note}>{note}</li>
             ))}
           </ul>
@@ -1060,7 +1137,7 @@ function DiseaseDetail({
       )}
 
       <section className="pattern-section">
-        <h3>Patterns</h3>
+        <h3>{text.patterns}</h3>
         {expandedContent ? (
           <div className="expanded-pattern-list">
             {Array.from(
@@ -1073,7 +1150,7 @@ function DiseaseDetail({
               }, new Map<string, typeof expandedContent.patterns>()),
             ).map(([section, patterns]) => (
               <section className="pattern-subsection" key={section || "all-patterns"}>
-                {section && <h4>{section}</h4>}
+                {section && <h4>{translateClinicalText(section, language)}</h4>}
                 {patterns.map((pattern) => {
                   const index = expandedContent.patterns.indexOf(pattern);
                   const patternKey = `${section}|${pattern.name}`;
@@ -1089,12 +1166,17 @@ function DiseaseDetail({
                         onClick={() => togglePattern(patternKey)}
                         type="button"
                       >
-                        <span>{displayPatternTitle(pattern.name)}</span>
+                        <span>
+                          {translateClinicalText(displayPatternTitle(pattern.name), language)}
+                        </span>
                         <ChevronRight size={18} aria-hidden="true" />
                       </button>
                       {openPattern === patternKey && (
                         <div className="pattern-card-body">
-                          <p><strong>Principle:</strong> {pattern.principle}</p>
+                          <p>
+                            <strong>{text.principle}</strong>{" "}
+                            {translateClinicalText(pattern.principle, language)}
+                          </p>
                           <PointPrescription
                             additions={pattern.pointAdditions}
                             principle={pattern.principle}
@@ -1104,7 +1186,9 @@ function DiseaseDetail({
                           {pattern.formula && (
                             <FormulaCard formula={pattern.formula} color={colorForPrinciple(pattern.principle)} />
                           )}
-                          {pattern.notes && <p>{pattern.notes}</p>}
+                          {pattern.notes && (
+                            <p>{translateClinicalText(pattern.notes, language)}</p>
+                          )}
                         </div>
                       )}
                     </article>
@@ -1127,15 +1211,17 @@ function DiseaseDetail({
                   onClick={() => togglePattern(pattern)}
                   type="button"
                 >
-                  <span>{displayPatternTitle(pattern)}</span>
+                  <span>{translateClinicalText(displayPatternTitle(pattern), language)}</span>
                   <ChevronRight size={18} aria-hidden="true" />
                 </button>
                 {openPattern === pattern && (
                   <div className="pattern-card-body">
                     {displayPatternTitle(pattern) !== pattern && (
-                      <p className="full-pattern-name">{pattern}</p>
+                      <p className="full-pattern-name">
+                        {translateClinicalText(pattern, language)}
+                      </p>
                     )}
-                    <p>Expanded clinical content has not been added for this pattern yet.</p>
+                    <p>{text.contentPending}</p>
                   </div>
                 )}
               </article>
@@ -1150,11 +1236,12 @@ function DiseaseDetail({
 
 function CommonStrategy({ content }: { content: (typeof expandedContentByCourse)[number] }) {
   const groups = commonPointStrategy(content);
+  const { language, text } = useLanguageText();
   if (groups.length === 0) return null;
 
   return (
     <section className="common-strategy-section">
-      <h3>Common Strategy</h3>
+      <h3>{text.commonStrategy}</h3>
       <div className="strategy-groups">
         {groups.map((group) => {
           const isCompact = group.points.length <= 2 && group.pairs.length === 0;
@@ -1168,10 +1255,12 @@ function CommonStrategy({ content }: { content: (typeof expandedContentByCourse)
               key={group.label}
               style={{ "--strategy-color": group.color ?? "#ece7de" } as CSSProperties}
             >
-              <div className="strategy-group-head">{label}</div>
+              <div className="strategy-group-head">
+                {translateClinicalText(label, language)}
+              </div>
               {group.points.length > 0 && (
                 <div className="strategy-block">
-                  <span>Common points</span>
+                  <span>{text.commonPoints}</span>
                   <div className="strategy-point-grid">
                     {group.points.map((point) => {
                       const meta = getPointMeta(point.code);
@@ -1194,7 +1283,7 @@ function CommonStrategy({ content }: { content: (typeof expandedContentByCourse)
               )}
               {group.pairs.length > 0 && (
                 <div className="strategy-block">
-                  <span>Common pairings</span>
+                  <span>{text.commonPairings}</span>
                   <div className="strategy-pair-list">
                     {group.pairs.map((pair) => (
                       <span
@@ -1225,17 +1314,19 @@ function FormulaCard({
   formula: FormulaDetail;
   color: string;
 }) {
+  const { language, text } = useLanguageText();
+
   return (
     <div className="formula-card" style={{ "--formula-color": color } as CSSProperties}>
       <div className="formula-card-head">
         <strong>{formula.chineseName}</strong>
         <span>{formula.pinyin}</span>
-        {formula.englishName && <small>{formula.englishName}</small>}
+        {language === "en" && formula.englishName && <small>{formula.englishName}</small>}
       </div>
       <div className="formula-card-body">
         {formula.ingredients && (
           <div className="formula-ingredient-section">
-            <span>Ingredients</span>
+            <span>{text.ingredients}</span>
             <div className="formula-ingredient-grid">
               {formula.ingredients.map((ingredient) => {
                 const property = propertyForIngredient(ingredient.chineseName);
@@ -1258,12 +1349,12 @@ function FormulaCard({
           </div>
         )}
         <div>
-          <span>Actions</span>
-          <p>{formula.actions.join("; ")}</p>
+          <span>{text.actions}</span>
+          <p>{translateClinicalList(formula.actions, language).join("；")}</p>
         </div>
         <div>
-          <span>Indications</span>
-          <p>{formula.indications}</p>
+          <span>{text.indications}</span>
+          <p>{translateClinicalText(formula.indications, language)}</p>
         </div>
       </div>
     </div>
@@ -1283,13 +1374,16 @@ function PointPrescription({
 }) {
   const groups = pointGroupsFor(principle, pointsText);
   const additionColor = colorForPrinciple(principle);
+  const { language, text } = useLanguageText();
 
   return (
     <div className="point-prescription">
-      <strong>Core Points</strong>
+      <strong>{text.corePoints}</strong>
       {groups.map((group) => (
         <div className="point-group" key={group.label}>
-          <div className="point-group-label">{group.label}</div>
+          <div className="point-group-label">
+            {translateClinicalText(group.label, language)}
+          </div>
           <div className="point-grid">
             {group.points.map((point) => {
               const meta = getPointMeta(point);
@@ -1310,10 +1404,10 @@ function PointPrescription({
       {extractPoints(pointsText).length === 0 && <p>{pointsText}</p>}
       {additions.length > 0 && (
         <div className="point-additions">
-          <strong>Additions</strong>
+          <strong>{text.additions}</strong>
           {additions.map((addition) => (
             <div className="point-addition" key={`${addition.indication}-${addition.points}`}>
-              <span>{addition.indication}</span>
+              <span>{translateClinicalText(addition.indication, language)}</span>
               <div className="point-grid">
                 {extractPoints(addition.points).map((point) => {
                   const meta = getPointMeta(point);
@@ -1336,10 +1430,10 @@ function PointPrescription({
       )}
       {techniques.length > 0 && (
         <div className="technique-notes">
-          <strong>Technique</strong>
+          <strong>{text.technique}</strong>
           <ul>
             {techniques.map((technique) => (
-              <li key={technique}>{technique}</li>
+              <li key={technique}>{translateClinicalText(technique, language)}</li>
             ))}
           </ul>
         </div>
