@@ -604,10 +604,11 @@
       "diseaseName": "Spontaneous Sweats and Night Sweats",
       "pinyin": "zi han / dao han",
       "subPatterns": [
-        "Spontaneous sweat: Lung Qi deficiency",
-        "disharmony between Ying and Wei",
-        "stagnation of pathogenic Heat. Night sweat: Blood deficiency",
-        "Yin deficiency of Lung/Kidney with empty Heat"
+        "Lung Qi Deficiency Spontaneous Sweat",
+        "Disharmony between Ying and Wei",
+        "Accumulation of Excess Heat",
+        "Heart Blood Deficiency Night Sweat",
+        "Yin Deficiency with Empty Fire Night Sweat"
       ],
       "sourceFile": "LEC 14 Sweating, stranguria, tinnitus.pdf"
     },

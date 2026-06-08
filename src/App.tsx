@@ -158,7 +158,11 @@ const principleStyles: Array<{
   { action: "promoteWater", label: "Move Water", color: "#42a5d6", match: /water|fluid|disinhibit|urine/i },
 ];
 
-function pointGroupsFor(principle: string, pointsText: string) {
+function pointGroupsFor(
+  principle: string,
+  pointsText: string,
+  pointRoles: Record<string, PointAction> = {},
+) {
   const relevant = principleStyles.filter((style) => style.match.test(principle));
   const groups = new Map<string, { label: string; color?: string; points: string[] }>();
 
@@ -170,7 +174,10 @@ function pointGroupsFor(principle: string, pointsText: string) {
 
   for (const point of extractPoints(pointsText)) {
     const meta = getPointMeta(point);
-    const matched = relevant.find((style) => meta.actions.includes(style.action));
+    const approvedRole = pointRoles[point];
+    const matched = approvedRole
+      ? styleForAction(approvedRole)
+      : relevant.find((style) => meta.actions.includes(style.action));
     if (matched) {
       addPoint(matched.action, matched.label, matched.color, point);
     } else {
@@ -508,7 +515,14 @@ function pointPairStyle(firstPoint: string, secondPoint: string): CSSProperties 
   return { "--pair-color-a": first, "--pair-color-b": second } as CSSProperties;
 }
 
-function actionForPointInPattern(point: string, principle: string) {
+function actionForPointInPattern(
+  point: string,
+  principle: string,
+  pointRoles: Record<string, PointAction> = {},
+) {
+  const approvedRole = pointRoles[point];
+  if (approvedRole) return styleForAction(approvedRole) ?? null;
+
   const meta = getPointMeta(point);
   const relevant = principleStyles.filter((style) => style.match.test(principle));
   const matched = relevant.find((style) => meta.actions.includes(style.action));
@@ -540,7 +554,7 @@ function commonPointStrategy(content: (typeof expandedContentByCourse)[number]) 
     const points = extractPoints(pattern.points);
 
     for (const point of points) {
-      const actionStyle = actionForPointInPattern(point, pattern.principle);
+      const actionStyle = actionForPointInPattern(point, pattern.principle, pattern.pointRoles);
       const action = actionStyle?.action ?? "neutral";
       const entry = pointMap.get(point) ?? { code: point, count: 0, actions: new Map() };
       entry.count += 1;
@@ -552,8 +566,8 @@ function commonPointStrategy(content: (typeof expandedContentByCourse)[number]) 
       for (let j = i + 1; j < points.length; j += 1) {
         const pair = [points[i], points[j]].sort() as [string, string];
         const key = pair.join("|");
-        const firstAction = actionForPointInPattern(pair[0], pattern.principle)?.action;
-        const secondAction = actionForPointInPattern(pair[1], pattern.principle)?.action;
+        const firstAction = actionForPointInPattern(pair[0], pattern.principle, pattern.pointRoles)?.action;
+        const secondAction = actionForPointInPattern(pair[1], pattern.principle, pattern.pointRoles)?.action;
         const action = firstAction && firstAction === secondAction
           ? firstAction
           : principleStyles.find((style) => style.match.test(pattern.principle))?.action ?? "neutral";
@@ -1179,6 +1193,7 @@ function DiseaseDetail({
                           </p>
                           <PointPrescription
                             additions={pattern.pointAdditions}
+                            pointRoles={pattern.pointRoles}
                             principle={pattern.principle}
                             pointsText={pattern.points}
                             techniques={pattern.techniques}
@@ -1363,16 +1378,18 @@ function FormulaCard({
 
 function PointPrescription({
   additions = [],
+  pointRoles = {},
   principle,
   pointsText,
   techniques = [],
 }: {
   additions?: NonNullable<(typeof expandedContentByCourse)[number]>["patterns"][number]["pointAdditions"];
+  pointRoles?: NonNullable<(typeof expandedContentByCourse)[number]>["patterns"][number]["pointRoles"];
   principle: string;
   pointsText: string;
   techniques?: NonNullable<(typeof expandedContentByCourse)[number]>["patterns"][number]["techniques"];
 }) {
-  const groups = pointGroupsFor(principle, pointsText);
+  const groups = pointGroupsFor(principle, pointsText, pointRoles);
   const additionColor = colorForPrinciple(principle);
   const { language, text } = useLanguageText();
 

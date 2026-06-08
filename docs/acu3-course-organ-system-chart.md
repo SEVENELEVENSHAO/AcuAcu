@@ -14,7 +14,7 @@ The CSV source for app import is `data/acu3-course-organ-system-chart.csv`.
 | 33 | Lung Distention | fei zhang | Phlegm-Turbidity obstructing Lung; Phlegm-Heat accumulating in Lung; Phlegm veiling Heart orifice; Qi deficiency of Lung and Kidney; Water retention due to Yang deficiency |
 | 37 | Pulmonary Abscess | fei yong | Initial stage; Suppurative stage; Perforating stage; Recovery stage |
 | 38 | Pulmonary Tuberculosis | fei lao | Lung Yin deficiency; Yin deficiency with effulgent Fire; Qi and Yin deficiency; Yin and Yang deficiency |
-| 40 | Spontaneous Sweats and Night Sweats | zi han / dao han | Spontaneous sweat: Lung Qi deficiency; disharmony between Ying and Wei; stagnation of pathogenic Heat. Night sweat: Blood deficiency; Yin deficiency of Lung/Kidney with empty Heat |
+| 40 | Spontaneous Sweats and Night Sweats | zi han / dao han | Lung Qi Deficiency Spontaneous Sweat; Disharmony between Ying and Wei; Accumulation of Excess Heat; Heart Blood Deficiency Night Sweat; Yin Deficiency with Empty Fire Night Sweat |
 | 46 | Wheezing Syndrome | xiao zheng | Acute cold Phlegm; Acute hot Phlegm; Chronic Lung deficiency; Chronic Spleen deficiency; Chronic Kidney deficiency |
 
 ## Heart and Mind Disorders

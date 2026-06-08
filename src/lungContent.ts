@@ -1,3 +1,5 @@
+import type { PointAction } from "./pointMeta";
+
 export type FormulaDetail = {
   chineseName: string;
   pinyin: string;
@@ -21,6 +23,7 @@ export type LungPatternDetail = {
   points: string;
   pointAdditions?: PointAddition[];
   techniques?: string[];
+  pointRoles?: Record<string, PointAction>;
   formula?: FormulaDetail;
   notes?: string;
   sourceAudit?: SourceAudit;
