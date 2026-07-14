@@ -1053,6 +1053,48 @@ p {
   color: #26312d;
 }
 
+.formula-safety-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--danger-border, #c8655b);
+  border-radius: 10px;
+  background: var(--danger-surface, #fff3f0);
+  color: var(--ink, #2f2925);
+}
+
+.formula-reference-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--panel-soft, #f3efe7);
+  color: var(--ink, #2f2925);
+}
+
+.formula-reference-notice svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.formula-reference-notice p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.formula-safety-warning svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--danger, #a53b32);
+}
+
+.formula-safety-warning p {
+  margin: 0;
+  line-height: 1.5;
+}
+
 .point-additions {
   border-top: 1px solid #c9cec9;
   display: grid;

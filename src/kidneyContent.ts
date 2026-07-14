@@ -102,7 +102,7 @@ const ingredients = {
   ],
   daiDiDangWan: [
     herb("大黄", "Da Huang", "12 g"), herb("当归尾", "Dang Gui Wei", "9 g"),
-    herb("生地黄", "Sheng Di Huang", "12 g"), herb("穿山甲", "Chuan Shan Jia", "6 g"),
+    herb("生地黄", "Sheng Di Huang", "12 g"),
     herb("桃仁", "Tao Ren", "9 g"), herb("肉桂", "Rou Gui", "3 g"),
   ],
   ganJiangLingZhuTang: [
@@ -263,6 +263,7 @@ export const kidneyContent: Record<number, LungConditionDetail> = {
   },
   39: {
     overview: "Seminal Emission (Yi Jing) includes nocturnal or spontaneous emission caused by Fire, Damp-Heat, Heart-Spleen deficiency, or Kidney failure to secure Essence.",
+    redFlags: ["Blood in semen or urine", "Severe genital, pelvic, flank, or testicular pain", "Fever, painful urination, or genital discharge", "New neurologic symptoms or loss of bladder control", "Persistent change with a mass, swelling, or unexplained weight loss"],
     patterns: [
       { name: "Heart Fire Hyperactivity with Kidney Yin Deficiency", principle: "Clear Heart Fire, nourish Kidney Yin, calm Shen.", points: "HT 8, HT 7, KI 3, KI 6, SP 6, CV 4.", formula: formulas.huangLianQingXinYin },
       { name: "Downward Flow of Damp-Heat", principle: "Clear lower-burner Damp-Heat, separate clear from turbid.", points: "CV 3, SP 9, LR 2, GB 34, ST 28, KI 10.", formula: formulas.biXieFenQingYin },

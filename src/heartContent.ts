@@ -534,6 +534,7 @@ export const heartContent: Record<number, LungConditionDetail> = {
   },
   28: {
     overview: "Insomnia (Bu Mei) includes difficulty falling asleep, frequent waking, dream-disturbed sleep, or inability to return to sleep due to disturbance of Shen.",
+    redFlags: ["Suicidal thoughts or inability to stay safe", "Mania, psychosis, severe agitation, or dangerous impulsivity", "Confusion or a sudden major change in mental state", "Severe sleepiness affecting driving or safety", "Breathing pauses, choking during sleep, or suspected sleep apnea"],
     patterns: [
       { name: "Liver Fire Blazing", principle: "Drain Liver Fire, calm Shen, settle Hun.", points: "LR 2, LR 3, GB 20, HT 7, PC 6, GV 24.", formula: formulas.longDanXieGanTang },
       { name: "Heart Fire Blazing", principle: "Clear Heart Fire, calm Shen, promote sleep.", points: "HT 8, HT 7, PC 7, KI 6, SP 6, Yintang.", formula: formulas.daoChiSan },
@@ -583,3 +584,35 @@ export const heartContent: Record<number, LungConditionDetail> = {
     ],
   },
 };
+
+heartContent[10].overview = "A convulsion or new seizure is a medical emergency until proven otherwise. Protect from injury, place the person on their side when possible, time the event, and do not restrain them or put anything in their mouth.";
+heartContent[10].redFlags = ["Call emergency services for a first seizure, seizure lasting 5 minutes or longer, repeated seizures without recovery, breathing difficulty, serious injury, pregnancy, diabetes, water-related seizure, fever with stiff neck, or persistent altered consciousness"];
+for (const pattern of heartContent[10].patterns) {
+  pattern.principle = "Emergency assessment and seizure first aid come first; do not delay hospital treatment for pattern differentiation.";
+  pattern.points = "No routine acupuncture prescription is shown during an active convulsion or unresolved altered consciousness.";
+  pattern.formula = undefined;
+  pattern.notes = "Acute point and oral-formula content is intentionally suppressed. Do not give anything by mouth during or immediately after a seizure until swallowing and consciousness are normal.";
+}
+
+heartContent[20].overview = "Epilepsy requires medical diagnosis and an individualized seizure-safety plan. Acupuncture or herbal reference content is adjunctive only and must not replace or change antiseizure medication without the prescribing clinician.";
+heartContent[20].redFlags = ["Call emergency services for a first seizure, seizure lasting 5 minutes or longer, repeated seizures without recovery, breathing difficulty, serious injury, pregnancy, diabetes, water-related seizure, or failure to return to the usual state"];
+for (const pattern of heartContent[20].patterns) {
+  pattern.notes = "Adjunctive reference only. Review interactions and seizure-threshold effects with the neurology and pharmacy team; never stop antiseizure medication abruptly.";
+}
+
+heartContent[21].overview = "Fainting or sudden loss of consciousness requires medical assessment for cardiac rhythm or structural disease, bleeding, stroke or seizure, pulmonary embolism, metabolic causes, medication effects, and pregnancy-related emergencies before pattern differentiation.";
+heartContent[21].redFlags = ["Call emergency services for fainting with chest pain, palpitations, shortness of breath, severe headache, neurologic symptoms, major bleeding, serious injury, pregnancy, exertion, persistent confusion, or failure to recover promptly", "Do not give food, drink, or oral herbs until consciousness and safe swallowing are fully restored"];
+for (const pattern of heartContent[21].patterns) {
+  pattern.principle = "Acute loss of consciousness requires emergency assessment and stabilization before any adjunctive pattern care.";
+  pattern.points = "No routine acupuncture prescription is shown during unresolved fainting, altered consciousness, or medical instability.";
+  pattern.formula = undefined;
+  pattern.notes = "Acute point and oral-formula content is intentionally suppressed. Place the person safely, monitor breathing, and use emergency services when indicated.";
+}
+
+for (const pattern of heartContent[47].patterns) {
+  if (!pattern.name.startsWith("Attack of")) continue;
+  pattern.principle = "Suspected acute stroke requires immediate emergency stroke care; do not delay imaging, thrombolysis, thrombectomy, blood-pressure management, or other hospital treatment.";
+  pattern.points = "No routine acupuncture prescription is shown for a suspected acute stroke before emergency evaluation and stabilization.";
+  pattern.formula = undefined;
+  pattern.notes = "Acute treatment content is intentionally suppressed. Use emergency services immediately and note the last-known-well time.";
+}

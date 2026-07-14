@@ -135,7 +135,7 @@ const ingredients = {
   fuYuanHuoXueTang: [
     herb("柴胡", "Chai Hu", "15 g"), herb("瓜蒌根", "Gua Lou Gen", "9 g"),
     herb("当归", "Dang Gui", "9 g"), herb("红花", "Hong Hua", "6 g"),
-    herb("甘草", "Gan Cao", "6 g"), herb("穿山甲", "Chuan Shan Jia", "6 g"),
+    herb("甘草", "Gan Cao", "6 g"),
     herb("大黄", "Da Huang", "18 g"), herb("桃仁", "Tao Ren", "15 g"),
   ],
   yinChenHaoTang: [
@@ -323,3 +323,11 @@ export const liverContent: Record<number, LungConditionDetail> = {
     ],
   },
 };
+
+liverContent[34].overview = "Suspected malaria requires urgent diagnostic testing and prompt guideline-based antimalarial treatment. Fever after travel or residence in a malaria area must not be managed as a routine TCM pattern or delayed while awaiting adjunctive care.";
+liverContent[34].redFlags = ["Emergency assessment is required for confusion, seizure, breathing difficulty, shock, jaundice, dark urine, severe anemia, repeated vomiting, inability to drink, bleeding, pregnancy, infancy, or rapidly worsening illness", "Tell the medical team about all recent travel, malaria prevention, prior treatment, pregnancy possibility, and medicines"];
+for (const pattern of liverContent[34].patterns) {
+  pattern.principle = `Only after malaria testing and required antimalarial treatment are underway: ${pattern.principle}`;
+  pattern.formula = undefined;
+  pattern.notes = "Oral formula content is suppressed because it must not replace species- and resistance-appropriate antimalarial therapy or delay emergency care.";
+}

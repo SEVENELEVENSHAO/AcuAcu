@@ -508,6 +508,7 @@ export const spleenContent: Record<number, LungConditionDetail> = {
   },
   24: {
     overview: "Hiccoughing and Belching (E Ni) are rebellious Stomach Qi rising upward due to Cold, Heat, food, Liver Qi, Yang deficiency, or Yin deficiency.",
+    redFlags: ["Persistent hiccups lasting more than 48 hours", "Chest pain, breathlessness, fainting, or neurologic symptoms", "Inability to swallow, repeated choking, or aspiration", "Vomiting blood, black stool, or severe abdominal pain", "Persistent symptoms with weight loss or dehydration"],
     patterns: [
       { name: "Stomach Cold", principle: "Warm Stomach, descend rebellious Qi, stop hiccup.", points: "CV 12, CV 13, ST 36, PC 6. Use moxa.", formula: formulas.dingXiangShiDiTang },
       { name: "Effulgent Stomach Fire", principle: "Clear Stomach Fire, descend Qi.", points: "ST 44, CV 12, PC 6, LI 11.", formula: formulas.zhuYeShiGaoTang },

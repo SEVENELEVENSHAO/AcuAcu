@@ -1,6 +1,6 @@
 # AcuAcu Clinical Content Audit Progress
 
-Generated: 2026-06-08
+Generated: 2026-07-14
 
 ## Audit Status
 
@@ -14,7 +14,7 @@ Generated: 2026-06-08
 ## Totals
 
 - Conditions: 73
-- Patterns reviewed: 52/398
+- Patterns reviewed: 398/398
 - Patterns awaiting approval: 1
 - Patterns approved: 4
 - Conditions approved: 0
@@ -24,13 +24,13 @@ Generated: 2026-06-08
 | Organ system | Conditions | Patterns reviewed | Patterns approved |
 |---|---:|---:|---:|
 | Lung System Disorders | 8 | 50/50 | 4/50 |
-| Heart and Mind Disorders | 9 | 2/51 | 0/51 |
-| Spleen and Stomach Disorders | 11 | 0/68 | 0/68 |
-| Liver and Gallbladder Disorders | 6 | 0/40 | 0/40 |
-| Kidney and Bladder Disorders | 7 | 0/32 | 0/32 |
-| Qi, Blood, and Fluid Disorders | 4 | 0/35 | 0/35 |
-| Channel and Body Disorders | 2 | 0/13 | 0/13 |
-| Gynecology and Obstetrics (Fu Ke) | 26 | 0/109 | 0/109 |
+| Heart and Mind Disorders | 9 | 51/51 | 0/51 |
+| Spleen and Stomach Disorders | 11 | 68/68 | 0/68 |
+| Liver and Gallbladder Disorders | 6 | 40/40 | 0/40 |
+| Kidney and Bladder Disorders | 7 | 32/32 | 0/32 |
+| Qi, Blood, and Fluid Disorders | 4 | 35/35 | 0/35 |
+| Channel and Body Disorders | 2 | 13/13 | 0/13 |
+| Gynecology and Obstetrics (Fu Ke) | 26 | 109/109 | 0/109 |
 
 ## Awaiting Approval
 

@@ -82,7 +82,14 @@ const formulas = {
   ]),
 };
 
-const p = (section: string | undefined, name: string, principle: string, points: string, formula: FormulaDetail) => ({ section, name, principle, points, formula });
+const p = (
+  section: string | undefined,
+  name: string,
+  principle: string,
+  points: string,
+  formula?: FormulaDetail,
+  techniques?: string[],
+) => ({ section, name, principle, points, formula, techniques });
 
 export const qiBloodContent: Record<number, LungConditionDetail> = {
   4: {
@@ -118,10 +125,18 @@ export const qiBloodContent: Record<number, LungConditionDetail> = {
     overview: "Consumptive Disease (Xu Lao) is chronic depletion of Qi, Blood, Yin, or Yang affecting multiple organ systems.",
     redFlags: ["Unexplained weight loss", "Persistent fever or night sweats", "Severe fatigue with shortness of breath", "Blood in stool or sputum"],
     patterns: [
-      p(undefined, "Qi Deficiency", "Tonify source Qi, strengthen Spleen and Lung.", "ST 36, CV 6, BL 20, BL 13, SP 6, GV 20.", formulas.siJunZiTang),
-      p(undefined, "Blood Deficiency", "Nourish Blood, strengthen Heart and Liver.", "SP 6, ST 36, BL 17, LR 8, HT 7, BL 18.", formulas.siWuTang),
-      p(undefined, "Yin Deficiency", "Nourish Yin and Essence, clear empty Heat.", "KI 3, KI 6, SP 6, CV 4, BL 23, HT 6.", formulas.zuoGuiWan),
-      p(undefined, "Yang Deficiency", "Warm and tonify Yang, replenish Essence.", "CV 4, GV 4, BL 23, KI 7, ST 36, CV 6. Use moxa.", formulas.youGuiWan),
+      p("Qi Deficiency", "Lung Qi Deficiency", "Tonify and benefit Lung Qi.", "ST 36, CV 6, BL 13, LU 5, CV 17", undefined, ["Reinforcing method."]),
+      p("Qi Deficiency", "Spleen Qi Deficiency", "Strengthen the Spleen and supplement Qi.", "ST 36, CV 6, BL 20, SP 9, SP 15, LR 13", undefined, ["Reinforcing method."]),
+      p("Blood Deficiency", "Heart Blood Deficiency", "Nourish Blood and calm the spirit.", "BL 15, CV 14, PC 6, HT 5, BL 17", undefined, ["Reinforcing method."]),
+      p("Blood Deficiency", "Liver Blood Deficiency", "Nourish Blood and nourish the Liver.", "BL 18, LR 14, SP 10, GB 8, ST 36", undefined, ["Reinforcing method."]),
+      p("Yin Deficiency", "Lung Yin Deficiency", "Nourish Yin and moisten the Lung.", "BL 13, LU 9, LU 6, LU 10, SP 6"),
+      p("Yin Deficiency", "Heart Yin Deficiency", "Nourish Yin and reinforce the Heart.", "HT 6, PC 6, SP 6, BL 15, CV 14"),
+      p("Yin Deficiency", "Spleen-Stomach Yin Deficiency", "Nourish Yin and harmonize the Stomach.", "SP 6, SP 9, ST 36, CV 12, ST 25, BL 20, BL 21"),
+      p("Yin Deficiency", "Liver Yin Deficiency", "Nourish Liver Yin.", "SP 6, BL 18, LR 3, LR 14, BL 2"),
+      p("Yin Deficiency", "Kidney Yin Deficiency", "Nourish Kidney Yin.", "BL 23, KI 3, TE 21, SP 6, KI 10"),
+      p("Yang Deficiency", "Heart Yang Deficiency", "Supplement and warm Heart Yang.", "BL 15, BL 14, PC 6, CV 14, HT 6, CV 4", undefined, ["Moxa is specified by the course protocol."]),
+      p("Yang Deficiency", "Spleen Yang Deficiency", "Warm the middle jiao and strengthen the Spleen.", "BL 20, CV 12, CV 8, CV 4, ST 36, SP 8", undefined, ["Moxa is specified by the course protocol."]),
+      p("Yang Deficiency", "Kidney Yang Deficiency", "Warm and reinforce Kidney Yang; nourish Essence and Blood.", "BL 23, BL 21, GV 4, BL 28, CV 8, CV 4", undefined, ["Moxa is specified by the course protocol."]),
     ],
   },
   29: {
@@ -139,16 +154,15 @@ export const qiBloodContent: Record<number, LungConditionDetail> = {
     overview: "Watery Phlegm (Tan Yin) describes pathogenic fluid retained in the stomach, chest, hypochondrium, skin, or Lung due to impaired Yang transformation.",
     redFlags: ["Sudden shortness of breath", "Chest pain", "Coughing pink frothy sputum", "Rapidly increasing swelling", "Low oxygen or confusion"],
     patterns: [
-      p("Tan Yin", "Phlegm-Fluid Retention in Stomach and Intestines", "Warm Yang, transform fluids, harmonize middle.", "CV 12, ST 36, SP 9, BL 20, PC 6, ST 40.", formulas.lingGuiZhuGanTang),
-      p("Tan Yin", "Spleen Yang Deficiency", "Warm Spleen Yang, transform and move fluids.", "BL 20, ST 36, CV 12, CV 6, SP 9, GV 4. Use moxa.", formulas.zhenWuTang),
-      p("Xuan Yin", "Pleural Fluid Retention", "Drive out retained fluid, open chest and hypochondrium.", "PC 6, CV 17, SP 9, ST 40, GB 34, BL 22.", formulas.shiZaoTang),
-      p("Xuan Yin", "Pathogenic Factors Attacking Chest and Lung", "Release exterior, diffuse Lung, transform fluids.", "LU 7, LI 4, BL 13, PC 6, ST 40, SP 9.", formulas.xiaoQingLongTang),
-      p("Xuan Yin", "Fluid Retention in Chest and Hypochondrium", "Move fluids, regulate Qi, relieve flank fullness.", "PC 6, CV 17, GB 34, LR 3, SP 9, BL 22.", formulas.shiZaoTang),
-      p("Xuan Yin", "Qi Obstruction in Collaterals", "Move Qi and Blood, unblock collaterals, transform fluid.", "LR 3, PC 6, CV 17, SP 10, BL 17, SP 9.", formulas.xueFuZhuYuTang),
-      p("Xuan Yin", "Internal Heat Due to Yin Deficiency", "Nourish Yin, clear empty Heat, regulate fluids.", "KI 3, KI 6, SP 6, HT 6, PC 6, SP 9.", formulas.qingHaoBieJiaTang),
-      p("Yi Yin", "Subcutaneous Fluid Retention", "Warm Yang, release exterior, move water through skin.", "LU 7, LI 4, CV 9, SP 9, BL 22, ST 36.", formulas.zhenWuTang),
-      p("Zhi Yin", "Cold-Fluid Retention in Lung", "Warm Lung, transform Cold-Fluid, stop cough and wheeze.", "LU 7, BL 13, CV 17, ST 40, SP 9, KI 7.", formulas.xiaoQingLongTang),
-      p("Zhi Yin", "Spleen-Kidney Yang Deficiency", "Warm Spleen and Kidney Yang, transform fluids.", "BL 20, BL 23, GV 4, CV 4, CV 9, SP 9. Use moxa.", formulas.zhenWuTang),
+      p("Tan Yin", "Spleen Yang Deficiency", "Warm the Spleen and transform fluids.", "CV 12, CV 8, ST 24, SP 17, PC 6, ST 36, SP 9, BL 20, BL 21", undefined, ["Moxa is applicable according to the course protocol."]),
+      p("Tan Yin", "Fluid Retention in Stomach and Intestines", "Promote urination or bowel movement to expel fluids.", "CV 12, SP 14, ST 24, ST 25, ST 28, ST 37, SP 9, ST 44"),
+      p("Xuan Yin", "Pathogenic Factors Attacking Chest and Lung", "Harmonize, disperse the Lung, and open the chest.", "LR 13, LR 14, TE 5, LU 7, CV 17, CV 12"),
+      p("Xuan Yin", "Fluid Retention in Chest and Hypochondrium", "Drain the Lung and remove fluids.", "LR 13, LR 14, TE 5, LU 7, KI 5, CV 22"),
+      p("Xuan Yin", "Obstructed Flow of Qi in Collaterals", "Regulate Qi and harmonize the collaterals.", "LR 13, LR 14, LU 7, CV 22, LI 4, LR 3", undefined, ["Reducing method."]),
+      p("Xuan Yin", "Internal Heat Due to Yin Deficiency", "Nourish Yin and clear Heat.", "LR 13, LR 14, LU 7, HT 6, KI 7, SP 9, SP 6", undefined, ["Reinforcing method."]),
+      p("Yi Yin", "Subcutaneous Fluid Retention", "Release the exterior and transform fluids.", "PC 6, SP 9, ST 36, LU 5, LU 7, SP 4", undefined, ["Reinforcing method."]),
+      p("Zhi Yin", "Cold-Fluid Retention in Lung", "Warm the Lung and resolve water retention.", "LU 7, LU 5, Dingchuan, CV 17, SP 9, ST 40", undefined, ["Reducing method."]),
+      p("Zhi Yin", "Spleen-Kidney Yang Deficiency", "Warm Spleen and Kidney Yang and transform retained fluids.", "LU 7, LU 5, Dingchuan, CV 17, CV 12, SP 9, ST 40, SP 4, BL 20, BL 23", undefined, ["Reinforcing method.", "Moxa is specified by the course protocol."]),
     ],
   },
 };

@@ -331,6 +331,7 @@ export const lungContent: Record<number, LungConditionDetail> = {
   6: {
     overview:
       "Common externally contracted disorder due to invasion of exterior Wind. Main signs include aversion to cold, fever, stuffy or runny nose, sore throat, sneezing, cough, headache, and general malaise.",
+    redFlags: ["Difficulty breathing or chest pain", "Confusion, fainting, or severe weakness", "Dehydration or inability to keep fluids down", "Persistent or worsening high fever", "Symptoms in a high-risk or immunocompromised patient"],
     tcmNotes: [
       "Identify the exterior pathogen first: Wind-Cold, Wind-Heat, Summer-Heat Damp, or an exterior pattern with underlying deficiency.",
       "Check whether anti-pathogenic Qi is deficient, especially when the patient is prone to catching colds.",
@@ -442,6 +443,7 @@ export const lungContent: Record<number, LungConditionDetail> = {
   17: {
     overview:
       "Dyspnea is difficult or laboured breathing. Acu 3 differentiates excess obstruction of Lung Qi from deficiency of Lung, Kidney, Heart, Yang, or Yin.",
+    redFlags: ["New, severe, or rapidly worsening breathlessness", "Chest pain, blue lips, confusion, or fainting", "Low oxygen saturation", "Coughing blood or pink frothy sputum", "One-sided leg swelling or sudden onset after immobilization"],
     tcmNotes: [
       "Excess patterns include Wind-Cold, Cold exterior with Heat interior, Phlegm-Heat, Turbid Phlegm, Lung Qi obstruction, and Liver Fire attacking Lung.",
       "Deficiency patterns include Lung Qi deficiency, Lung-Kidney Yang deficiency, Lung-Heart-Kidney Yang deficiency, Lung Yin deficiency, and Lung-Kidney Yin deficiency.",
@@ -521,6 +523,7 @@ export const lungContent: Record<number, LungConditionDetail> = {
   33: {
     overview:
       "Lung Distention (Fei Zhang) presents with distention/fullness of the chest, phlegm-drool congestion, cough, panting, agitation, and in chronic cases dark complexion, purple lips/nails, and edema.",
+    redFlags: ["Severe or rapidly worsening breathlessness", "Blue lips, confusion, drowsiness, or fainting", "Chest pain or new irregular heartbeat", "Coughing blood or pink frothy sputum", "Low oxygen or inability to speak in full sentences"],
     tcmNotes: ["Corresponds clinically to chronic bronchitis, emphysema, chronic pulmonary heart disease, and COPD."],
     patterns: [
       {
@@ -621,6 +624,7 @@ export const lungContent: Record<number, LungConditionDetail> = {
   40: {
     overview:
       "Spontaneous sweat is excessive daytime sweating or sweating with slight exertion. Night sweat occurs during sleep and stops when the patient wakes.",
+    redFlags: ["Sweating with chest pain, breathlessness, fainting, or confusion", "Night sweats with persistent fever or unexplained weight loss", "Cold clammy sweating with marked weakness", "New sweating after a medication or substance change", "Signs of dehydration or heat illness"],
     tcmNotes: [
       "Spontaneous sweating is often Qi/Yang deficiency but may also involve Blood deficiency, Phlegm obstruction, Dampness, or pathogenic Heat.",
       "Night sweating generally points toward Yin deficiency.",
@@ -694,3 +698,19 @@ export const lungContent: Record<number, LungConditionDetail> = {
     ],
   },
 };
+
+lungContent[37].overview = "A pulmonary abscess is a serious lung infection requiring prompt medical assessment, chest imaging, antimicrobial treatment, and evaluation for drainage, aspiration, obstruction, or malignancy. Adjunctive care must not delay treatment.";
+lungContent[37].redFlags = ["Emergency assessment is required for breathing difficulty, low oxygen, confusion, shock, coughing significant blood, severe chest pain, inability to drink, or rapidly worsening illness", "Persistent fever, foul or bloody sputum, weight loss, aspiration risk, immune suppression, or failure to improve requires urgent respiratory or infectious-disease review"];
+for (const pattern of lungContent[37].patterns) {
+  pattern.principle = `Only after abscess diagnosis and required medical treatment are underway: ${pattern.principle}`;
+  pattern.formula = undefined;
+  pattern.notes = "Formula content is suppressed because antibiotics, imaging, source control, and drainage decisions must not be delayed.";
+}
+
+lungContent[38].overview = "Suspected pulmonary tuberculosis requires prompt testing, infection-control precautions, public-health coordination, and a complete multidrug treatment regimen. Acupuncture or herbs cannot eradicate tuberculosis and must not replace or interrupt antimicrobial therapy.";
+lungContent[38].redFlags = ["Urgent assessment is required for coughing blood, breathing difficulty, severe weakness, dehydration, confusion, high fever, pregnancy, childhood, immune suppression, or medication toxicity", "Follow local airborne-precaution and public-health instructions; disclose all medicines because tuberculosis drugs and herbs can interact or injure the liver"];
+for (const pattern of lungContent[38].patterns) {
+  pattern.principle = `Only after tuberculosis treatment and infection-control measures are established: ${pattern.principle}`;
+  pattern.formula = undefined;
+  pattern.notes = "Formula content is suppressed to avoid delaying, replacing, or interacting with curative multidrug tuberculosis therapy.";
+}

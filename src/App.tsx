@@ -1,4 +1,5 @@
 import {
+  AlertTriangle,
   ArrowLeft,
   BookOpen,
   ChevronRight,
@@ -8,6 +9,8 @@ import type { CSSProperties } from "react";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import acuData from "../data/acu3-course-organ-system-chart.json";
 import { channelContent } from "./channelContent";
+import { clinicalLecturePoints } from "./clinicalLecturePoints";
+import { clinicalLectureTechniques } from "./clinicalLectureTechniques";
 import { translateClinicalList, translateClinicalText } from "./clinicalTranslations";
 import { auditConditionContent } from "./clinicalAudit";
 import { gyneContent } from "./gyneContent";
@@ -23,6 +26,7 @@ import {
 import { liverContent } from "./liverContent";
 import { lungContent, type FormulaDetail } from "./lungContent";
 import { qiBloodContent } from "./qiBloodContent";
+import { sectionLecturePoints, sectionLectureTechniques } from "./sectionLecturePoints";
 import { spleenContent } from "./spleenContent";
 import { extractPoints, getPointMeta, type PointAction } from "./pointMeta";
 
@@ -76,6 +80,75 @@ const rawContentByCourse = {
   ...channelContent,
   ...gyneContent,
 };
+
+const unmatchedLectureMappings: string[] = [];
+for (const [key, points] of Object.entries(clinicalLecturePoints)) {
+  const separator = key.indexOf("|");
+  const courseNumber = Number(key.slice(0, separator));
+  const patternName = key.slice(separator + 1);
+  const content = rawContentByCourse[courseNumber as keyof typeof rawContentByCourse];
+  const pattern = content?.patterns.find((candidate) => candidate.name.toLowerCase() === patternName);
+
+  if (!pattern) {
+    unmatchedLectureMappings.push(key);
+    continue;
+  }
+
+  if (courseNumber === 47 && pattern.name.startsWith("Attack of")) {
+    continue;
+  }
+
+  pattern.points = points;
+  const techniques = clinicalLectureTechniques[key];
+  if (techniques) pattern.techniques = techniques;
+  pattern.notes = `${pattern.notes ?? ""} Core points are aligned to the reviewed course lecture; technique, additions, and clinical suitability still require practitioner judgment.`.trim();
+}
+
+if (unmatchedLectureMappings.length > 0) {
+  throw new Error(`Unmatched lecture point mappings: ${unmatchedLectureMappings.join(", ")}`);
+}
+
+const unmatchedSectionMappings: string[] = [];
+for (const [key, points] of Object.entries(sectionLecturePoints)) {
+  const [coursePart, sectionPart, ...patternParts] = key.split("|");
+  const courseNumber = Number(coursePart);
+  const patternName = patternParts.join("|");
+  const content = rawContentByCourse[courseNumber as keyof typeof rawContentByCourse];
+  const pattern = content?.patterns.find((candidate) =>
+    candidate.section?.toLowerCase() === sectionPart && candidate.name.toLowerCase() === patternName
+  );
+  if (!pattern) {
+    unmatchedSectionMappings.push(key);
+    continue;
+  }
+  pattern.points = points;
+  const techniques = sectionLectureTechniques[key];
+  if (techniques) pattern.techniques = techniques;
+  pattern.notes = `${pattern.notes ?? ""} Section-specific core points are aligned to the reviewed course lecture.`.trim();
+}
+
+if (unmatchedSectionMappings.length > 0) {
+  throw new Error(`Unmatched section-specific lecture mappings: ${unmatchedSectionMappings.join(", ")}`);
+}
+
+const patternsWithoutDedicatedLectureProtocol = [
+  "22|qi stagnation with spleen qi deficiency and phlegm",
+  "23|turbid phlegm-wind",
+];
+
+for (const key of patternsWithoutDedicatedLectureProtocol) {
+  const separator = key.indexOf("|");
+  const courseNumber = Number(key.slice(0, separator));
+  const patternName = key.slice(separator + 1);
+  const content = rawContentByCourse[courseNumber as keyof typeof rawContentByCourse];
+  const pattern = content?.patterns.find((candidate) => candidate.name.toLowerCase() === patternName);
+  if (!pattern) throw new Error(`Missing unsupported-pattern gate: ${key}`);
+
+  pattern.points = "No dedicated course point prescription is published for this named pattern.";
+  pattern.formula = undefined;
+  pattern.notes = "The mechanism is retained for differentiation, but the prior app-generated point and formula treatment is withheld pending an approved source.";
+}
+
 const expandedContentByCourse = Object.fromEntries(
   dataset.items.flatMap((condition) => {
     const content = rawContentByCourse[condition.courseNumber];
@@ -84,6 +157,8 @@ const expandedContentByCourse = Object.fromEntries(
       : [];
   }),
 ) as typeof rawContentByCourse;
+
+export const contentByCourseForVerification = expandedContentByCourse;
 const categoryOrder = [
   "Lung System Disorders",
   "Heart and Mind Disorders",
@@ -373,7 +448,6 @@ const herbProperties: Record<string, HerbProperty> = {
   白豆蔻: "warm",
   贝母: "cool",
   常山: "cold",
-  穿山甲: "cool",
   杜仲: "warm",
   藁本: "warm",
   钩藤: "cool",
@@ -1330,6 +1404,38 @@ function FormulaCard({
   color: string;
 }) {
   const { language, text } = useLanguageText();
+  const ingredientNames = new Set(formula.ingredients?.map((ingredient) => ingredient.pinyin) ?? []);
+  const safetyWarnings: Array<{ title: string; body: string }> = [];
+  if (["Fu Zi", "Chuan Wu", "Cao Wu"].some((name) => ingredientNames.has(name))) {
+    safetyWarnings.push({
+      title: "Aconite safety warning.",
+      body: "Aconite can cause life-threatening heart and neurologic toxicity if the species, processing, dose, preparation, or combination is unsafe. This is reference content only and requires a qualified prescriber and regulated product. Do not self-prepare or self-dose.",
+    });
+  }
+  if (ingredientNames.has("Zhu Sha")) {
+    safetyWarnings.push({
+      title: "Mercury-containing historical ingredient.",
+      body: "Zhu Sha (cinnabar) contains mercury. Do not ingest or self-prepare this formula. The composition is shown only as a historical reference and requires jurisdiction-specific professional and regulatory review.",
+    });
+  }
+  if (ingredientNames.has("Bai Guo")) {
+    safetyWarnings.push({
+      title: "Ginkgo seed toxicity warning.",
+      body: "Bai Guo seeds can cause serious poisoning, especially when raw, improperly prepared, or taken in excess. Exact-dose use requires a qualified prescriber and a regulated, correctly processed product.",
+    });
+  }
+  if (ingredientNames.has("Ma Huang")) {
+    safetyWarnings.push({
+      title: "Ephedra cardiovascular warning.",
+      body: "Ma Huang can raise heart rate and blood pressure and has important medication and cardiovascular risks. Do not self-dose; screen for heart disease, hypertension, pregnancy, stimulant use, and drug interactions.",
+    });
+  }
+  if (ingredientNames.has("Ban Xia")) {
+    safetyWarnings.push({
+      title: "Processing required.",
+      body: "Ban Xia must be correctly identified and professionally processed; raw or improperly prepared material is irritating and toxic. Use only a regulated product under qualified supervision.",
+    });
+  }
 
   return (
     <div className="formula-card" style={{ "--formula-color": color } as CSSProperties}>
@@ -1339,6 +1445,20 @@ function FormulaCard({
         {language === "en" && formula.englishName && <small>{formula.englishName}</small>}
       </div>
       <div className="formula-card-body">
+        <div className="formula-reference-notice" role="note">
+          <BookOpen size={18} aria-hidden="true" />
+          <p>
+            <strong>Reference, not a prescription.</strong> Listed quantities describe source material and are not individualized dosing instructions. A qualified prescriber must verify the diagnosis, preparation, product quality, interactions, allergies, pregnancy or lactation, age, and liver or kidney function.
+          </p>
+        </div>
+        {safetyWarnings.map((warning) => (
+          <div className="formula-safety-warning" role="note" key={warning.title}>
+            <AlertTriangle size={18} aria-hidden="true" />
+            <p>
+              <strong>{warning.title}</strong> {warning.body}
+            </p>
+          </div>
+        ))}
         {formula.ingredients && (
           <div className="formula-ingredient-section">
             <span>{text.ingredients}</span>

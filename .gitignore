@@ -1,5 +1,6 @@
-node_modules/
 dist/
+node_modules/
+.clinical-cache/
 .env
 .env.*
 *.local
